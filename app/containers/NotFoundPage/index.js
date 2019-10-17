@@ -1,19 +1,53 @@
 /**
- * NotFoundPage
  *
- * This is the page we show when the user visits a url that doesn't have a route
+ * NotFoundPage
  *
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
-import messages from './messages';
+import { useInjectSaga } from 'utils/injectSaga';
+import { useInjectReducer } from 'utils/injectReducer';
+import makeSelectNotFoundPage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
 
-export default function NotFound() {
+export function NotFoundPage() {
+  useInjectReducer({ key: 'notFoundPage', reducer });
+  useInjectSaga({ key: 'notFoundPage', saga });
+
   return (
-    <h1>
-      <FormattedMessage {...messages.header} />
-    </h1>
+    <div>
+      <Helmet>
+        <title>NotFoundPage</title>
+        <meta name="description" content="Description of NotFoundPage" />
+      </Helmet>
+    </div>
   );
 }
+
+NotFoundPage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  notFoundPage: makeSelectNotFoundPage(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+);
+
+export default compose(withConnect)(NotFoundPage);
