@@ -22,12 +22,12 @@ export function NotFoundPage() {
   useInjectSaga({ key: 'notFoundPage', saga });
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>NotFoundPage</title>
         <meta name="description" content="Description of NotFoundPage" />
       </Helmet>
-    </div>
+    </>
   );
 }
 

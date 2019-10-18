@@ -65,6 +65,8 @@
   },
   "dependencies": {
     "@babel/polyfill": "7.4.3",
+    "antd": "^3.24.0",
+    "babel-plugin-import": "^1.12.2",
     "chalk": "^2.4.2",
     "compression": "1.7.4",
     "connected-react-router": "6.4.0",
@@ -79,6 +81,7 @@
     "ip": "1.1.5",
     "lodash": "4.17.11",
     "minimist": "1.2.0",
+    "moment": "^2.24.0",
     "prop-types": "15.7.2",
     "react": "16.8.6",
     "react-dom": "16.8.6",
