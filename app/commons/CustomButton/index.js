@@ -37,6 +37,7 @@ CustomButton.propTypes = {
   children: PropTypes.node,
   color: PropTypes.string,
   iconType: PropTypes.string,
+  className: PropTypes.string,
 };
 
 CustomButton.propTypes = {};

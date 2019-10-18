@@ -51,6 +51,16 @@ const Wrapper = styled(Layout.Header)`
       display: none;
     }
   }
+
+  @media (max-width: ${breakpoints.xs}) {
+    & .navbars-container {
+      display: none;
+    }
+
+    & {
+      justify-content: space-between;
+    }
+  }
 `;
 
 export default Wrapper;
