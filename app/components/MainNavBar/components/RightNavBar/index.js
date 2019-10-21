@@ -51,8 +51,10 @@ function RightNavBar() {
       <AvatarContainer overlay={notificationMenu()}>
         <span>
           <Avatar>Hunq vux</Avatar>
+          {/* only accept name having smaller or equal to 12 */}
           <UserName className="text-white navbar-avatar-name">
-            HunqVux99 <Icon type="caret-down" />
+            HunqVux99
+            <Icon type="caret-down" />
           </UserName>
         </span>
       </AvatarContainer>

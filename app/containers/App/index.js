@@ -9,6 +9,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Layout } from 'antd';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -18,14 +19,19 @@ import MainNavBar from 'components/MainNavBar/index';
 import GlobalStyle from '../../global-styles';
 
 export default function App() {
+  const { Content, Footer } = Layout;
+
   return (
-    <>
+    <Layout className="layout">
       <MainNavBar />
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route component={NotFoundPage} />
-      </Switch>
-      <GlobalStyle />
-    </>
+      <Content>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+        <GlobalStyle />
+      </Content>
+      <Footer />
+    </Layout>
   );
 }
