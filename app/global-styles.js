@@ -1,43 +1,13 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  span {
-    line-height: 0;
+  .ant-layout-header {
+    height: 64px;
   }
 
-  .rounded-pill {
-    border-radius: 50px;
-  }
-
-  .d-flex {
+  .ant-menu-item {
     display: flex;
-  }
-
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  .clearfix::after {
-    display: block;
-    clear: both;
-    content: "";
-  }
-
-  .justify-content-between {
-    justify-content: space-between !important;
-  }
-
-  .align-items-center {
-    align-items: center !important;
-  }
-
-  .line-height-0 {
-    line-height: 0;
-  }
-
-  .text-white {
-    color: white;
+    align-items: center;
   }
 `;
 

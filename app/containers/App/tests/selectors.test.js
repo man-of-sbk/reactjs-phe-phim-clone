@@ -1,13 +1,7 @@
-import { makeSelectLocation } from 'containers/App/selectors';
+// import { selectAppDomain } from '../selectors';
 
-describe('makeSelectLocation', () => {
-  it('should select the location', () => {
-    const router = {
-      location: { pathname: '/foo' },
-    };
-    const mockedState = {
-      router,
-    };
-    expect(makeSelectLocation()(mockedState)).toEqual(router.location);
+describe('selectAppDomain', () => {
+  it('Expect to have unit tests specified', () => {
+    expect(true).toEqual(false);
   });
 });

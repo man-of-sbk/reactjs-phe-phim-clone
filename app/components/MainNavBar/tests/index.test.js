@@ -1,6 +1,6 @@
 /**
  *
- * Tests for MainNavBar
+ * Tests for MainNavbar
  *
  * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
  *
@@ -10,12 +10,12 @@ import React from 'react';
 import { render } from 'react-testing-library';
 // import 'jest-dom/extend-expect'; // add some helpful assertions
 
-import MainNavBar from '../index';
+import MainNavbar from '../index';
 
-describe('<MainNavBar />', () => {
+describe('<MainNavbar />', () => {
   it('Expect to not log errors in console', () => {
     const spy = jest.spyOn(global.console, 'error');
-    render(<MainNavBar />);
+    render(<MainNavbar />);
     expect(spy).not.toHaveBeenCalled();
   });
 
@@ -31,7 +31,7 @@ describe('<MainNavBar />', () => {
   it.skip('Should render and match the snapshot', () => {
     const {
       container: { firstChild },
-    } = render(<MainNavBar />);
+    } = render(<MainNavbar />);
     expect(firstChild).toMatchSnapshot();
   });
 });
