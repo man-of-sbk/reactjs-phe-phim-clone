@@ -5,15 +5,17 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Button from './styledComponents/Button';
-// import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
-function NavbarHamburger() {
-  return <Button iconType="menu" />;
+function NavbarHamburger({ onClick }) {
+  return <Button iconType="menu" onClick={onClick} />;
 }
 
-NavbarHamburger.propTypes = {};
+NavbarHamburger.propTypes = {
+  onClick: PropTypes.func,
+};
 
 export default NavbarHamburger;

@@ -1,15 +1,9 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { dark, primary } from 'cssVariable';
+import { primary } from 'cssVariable';
 import { Layout } from 'antd';
 
 const Wrapper = styled(Layout.Header)`
-  background: ${dark};
-
-  > * {
-    background: ${dark};
-  }
-
   .ant-menu {
     border: 0;
 

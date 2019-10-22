@@ -8,10 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Menu } from 'antd';
+import { Menu, Icon } from 'antd';
 
 import { primary, darkGrey, secondary } from 'cssVariable';
 
+import Input from 'components/Input/index';
 import Button from 'components/Button/index';
 
 import Wrapper from './styledComponents/Wrapper';
@@ -21,14 +22,26 @@ import { links } from './config';
 
 function NavLinks({ mode }) {
   return (
-    <Wrapper className={mode === `horizontal` && `d-flex`} mode={mode}>
+    <Wrapper className={mode === `horizontal` && `d-flex-ni`} mode={mode}>
       {links.map((link, index) => (
         <Menu.Item key={index}>
           <NavLink to={link.to}>{link.content}</NavLink>
         </Menu.Item>
       ))}
+      <Menu.Item className="search-navlink-container">
+        <Input className="search-input" search />
+        <NavLink className="search-navlink" to="/">
+          <Icon type="search" />
+        </NavLink>
+      </Menu.Item>
+
       <Menu.Item className="right-links-container">
-        <Button borderColor={primary} color={primary} iconType="form">
+        <Button
+          className="write-post-btn"
+          borderColor={primary}
+          color={primary}
+          iconType="form"
+        >
           <NavLink to="/">Viết bài</NavLink>
         </Button>
 

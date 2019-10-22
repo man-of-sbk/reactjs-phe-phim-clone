@@ -1,10 +1,21 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import { Menu } from 'antd';
+import { secondary } from 'cssVariable';
 import * as breakpoints from 'breakpoints';
 
 const Wrapper = styled(Menu)`
   align-items: center;
+  border: 0;
+
+  .search-navlink {
+    i {
+      display: none;
+      vertical-align: 1px;
+      font-size: 20px;
+      color: ${secondary};
+    }
+  }
 
   .right-links-container {
     display: flex;
@@ -16,7 +27,33 @@ const Wrapper = styled(Menu)`
   }
 
   @media (max-width: ${breakpoints.xs}) {
-    display: none !important;
+    display: ${props => props.mode === 'horizontal' && `none !important`};
+  }
+
+  @media (max-width: ${breakpoints.md}) {
+    .search-input {
+      display: none;
+    }
+
+    .search-navlink i {
+      display: block;
+    }
+  }
+
+  @media (max-width: ${breakpoints.sm}) {
+    .write-post-btn {
+      border: ${props => props.mode === 'horizontal' && `0`};
+      padding: ${props => props.mode === 'horizontal' && `0`};
+
+      > a {
+        display: ${props => props.mode === 'horizontal' && `none`};
+      }
+
+      > i {
+        margin: ${props => props.mode === 'horizontal' && `0`};
+        font-size: ${props => props.mode === 'horizontal' && `20px`};
+      }
+    }
   }
 `;
 

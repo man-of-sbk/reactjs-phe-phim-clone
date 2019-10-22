@@ -23,6 +23,8 @@ import Footer from 'components/Footer/index';
 import GlobalStyle from 'global-styles';
 import GlobalThemeStyles from 'global-theme-styles';
 
+import Wrapper from './styledComponents/Wrapper';
+
 import makeSelectApp from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -33,8 +35,10 @@ export function App() {
 
   return (
     <>
-      <Layout className="layout">
-        <MainNavbar />
+      <Wrapper>
+        <Layout.Header>
+          <MainNavbar />
+        </Layout.Header>
         <Layout.Content>
           <Switch>
             <Route exact path="/" component={HomePage} />
@@ -42,7 +46,7 @@ export function App() {
           </Switch>
         </Layout.Content>
         <Footer />
-      </Layout>
+      </Wrapper>
       <GlobalStyle />
       <GlobalThemeStyles />
     </>

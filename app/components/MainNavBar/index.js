@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import NavLinks from 'components/NavLinks/index';
 import NavbarHamburger from 'components/NavbarHamburger/index';
@@ -16,12 +16,18 @@ import Wrapper from './styledComponents/Wrapper';
 // import styled from 'styled-components';
 
 function MainNavbar() {
+  const [drawerVisible, setDrawerVisible] = useState(false);
+
+  const onOpenDrawer = () => {
+    setDrawerVisible(!drawerVisible);
+  };
+
   return (
-    <Wrapper className="clearfix">
+    <Wrapper className="clearfix container">
       <Logo />
       <NavLinks className="float-left" mode="horizontal" />
-      <NavbarHamburger />
-      <NavbarDrawer />
+      <NavbarHamburger onClick={onOpenDrawer} />
+      <NavbarDrawer visible={drawerVisible} onClose={onOpenDrawer} />
     </Wrapper>
   );
 }

@@ -24,13 +24,21 @@ const StyledButton = styled(AntButton)`
   }
 `;
 
-function Button({ children, color, iconType, className, borderColor }) {
+function Button({
+  children,
+  color,
+  iconType,
+  className,
+  borderColor,
+  onClick,
+}) {
   return (
     <StyledButton
+      className={className}
       ghost
       color={color}
       borderColor={borderColor}
-      className={className}
+      onClick={onClick}
     >
       {iconType !== undefined && <Icon type={iconType} />}
       {children}
@@ -42,7 +50,9 @@ Button.propTypes = {
   children: PropTypes.node,
   color: PropTypes.string,
   iconType: PropTypes.string,
+  borderColor: PropTypes.string,
   className: PropTypes.string,
+  onClick: PropTypes.func,
 };
 
 Button.propTypes = {};

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
+// *** ni: => not important
 const GlobalThemeStyles = createGlobalStyle`
   .rounded-pill {
     border-radius: 50px;
@@ -7,6 +8,14 @@ const GlobalThemeStyles = createGlobalStyle`
 
   .d-flex {
     display: flex!important;
+  }
+
+  .d-flex-ni {
+    display: flex;
+  } 
+
+  .d-none {
+    display: none!important;
   }
 
   .row {
@@ -46,6 +55,38 @@ const GlobalThemeStyles = createGlobalStyle`
 
   .ml-auto {
     margin-left: auto
+  }
+
+  .container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
   }
 `;
 
