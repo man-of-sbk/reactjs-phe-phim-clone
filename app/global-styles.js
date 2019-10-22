@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
     display: flex;
     align-items: center;
   }
+
+  a::before {
+    content: none!important;
+  }
 `;
 
 export default GlobalStyle;
