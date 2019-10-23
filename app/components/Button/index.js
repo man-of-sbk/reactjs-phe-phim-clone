@@ -6,23 +6,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import { Button as AntButton, Icon } from 'antd';
+import { Icon } from 'antd';
 
-const StyledButton = styled(AntButton)`
-  border-color: ${props => props.borderColor};
-  color: ${props => props.color};
-  display: flex;
-  align-items: center;
-
-  .anticon {
-    margin-right: 10px;
-  }
-
-  a {
-    color: ${props => props.color}!important;
-  }
-`;
+import StyledButton from './styledComponents/Button';
 
 function Button({
   children,

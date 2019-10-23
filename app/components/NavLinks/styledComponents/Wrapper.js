@@ -26,11 +26,11 @@ const Wrapper = styled(Menu)`
     }
   }
 
-  @media (max-width: ${breakpoints.xs}) {
+  @media (max-width: ${breakpoints.xs}px) {
     display: ${props => props.mode === 'horizontal' && `none !important`};
   }
 
-  @media (max-width: ${breakpoints.md}) {
+  @media (max-width: ${breakpoints.md}px) {
     .search-input {
       display: none;
     }
@@ -40,7 +40,7 @@ const Wrapper = styled(Menu)`
     }
   }
 
-  @media (max-width: ${breakpoints.sm}) {
+  @media (max-width: ${breakpoints.sm}px) {
     .write-post-btn {
       border: ${props => props.mode === 'horizontal' && `0`};
       padding: ${props => props.mode === 'horizontal' && `0`};

@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import { primary } from 'cssVariable';
-import { Layout } from 'antd';
 
-const Wrapper = styled(Layout.Header)`
+const Wrapper = styled.div`
+  height: 100%;
+
   .ant-menu {
     border: 0;
 

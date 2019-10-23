@@ -41,6 +41,10 @@ const GlobalThemeStyles = createGlobalStyle`
     line-height: 0;
   }
 
+  .h-100 {
+    height: 100%;
+  }
+
   .text-white {
     color: white;
   }

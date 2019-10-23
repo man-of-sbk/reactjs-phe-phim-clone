@@ -13,6 +13,9 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+
+import LgMovieList from 'components/LgMovieList/index';
+
 import makeSelectHomePage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -27,6 +30,9 @@ export function HomePage() {
         <title>HomePage</title>
         <meta name="description" content="Description of HomePage" />
       </Helmet>
+      <div className="container">
+        <LgMovieList />
+      </div>
     </>
   );
 }

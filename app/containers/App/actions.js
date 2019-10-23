@@ -4,10 +4,22 @@
  *
  */
 
-import { DEFAULT_ACTION } from './constants';
+import * as actionTypes from './constants';
 
-export function defaultAction() {
+export function fetchMoviesAction() {
   return {
-    type: DEFAULT_ACTION,
+    type: actionTypes.FETCH_MOVIES_ACTION,
+  };
+}
+
+export function fetchMoviesSuccessAction() {
+  return {
+    type: actionTypes.FETCH_MOVIES_SUCCESS_ACTION,
+  };
+}
+
+export function fetchMoviesFailedAction() {
+  return {
+    type: actionTypes.FETCH_MOVIES_FAILED_ACTION,
   };
 }

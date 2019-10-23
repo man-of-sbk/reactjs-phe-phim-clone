@@ -23,7 +23,7 @@ const Button = styled(CustomButton)`
     align-items: center;
   }
 
-  @media (max-width: ${breakpoints.xs}) {
+  @media (max-width: ${breakpoints.xs}px) {
     & {
       display: block;
     }

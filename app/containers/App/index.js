@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -29,9 +29,15 @@ import makeSelectApp from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function App() {
+import * as actions from './actions';
+
+export function App({ dispatchFetchMovies }) {
   useInjectReducer({ key: 'app', reducer });
   useInjectSaga({ key: 'app', saga });
+
+  useEffect(() => {
+    dispatchFetchMovies();
+  }, []);
 
   return (
     <>
@@ -54,7 +60,7 @@ export function App() {
 }
 
 App.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  dispatchFetchMovies: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -63,7 +69,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    dispatchFetchMovies: () => dispatch(actions.fetchMoviesAction()),
   };
 }
 

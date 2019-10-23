@@ -1,6 +1,12 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put, select, all } from 'redux-saga/effects';
+
+import * as actionTypes from './constants';
+
+function* fetchMovies() {
+  console.log('fetch movies');
+}
 
 // Individual exports for testing
 export default function* appSaga() {
-  // See example in containers/HomePage/saga.js
+  yield all([takeLatest(actionTypes.FETCH_MOVIES_ACTION, fetchMovies)]);
 }

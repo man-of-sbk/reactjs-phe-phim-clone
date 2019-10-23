@@ -23,11 +23,13 @@ function MainNavbar() {
   };
 
   return (
-    <Wrapper className="clearfix container">
-      <Logo />
-      <NavLinks className="float-left" mode="horizontal" />
-      <NavbarHamburger onClick={onOpenDrawer} />
-      <NavbarDrawer visible={drawerVisible} onClose={onOpenDrawer} />
+    <Wrapper className="clearfix">
+      <div className="container h-100">
+        <Logo />
+        <NavLinks className="float-left" mode="horizontal" />
+        <NavbarHamburger onClick={onOpenDrawer} />
+        <NavbarDrawer visible={drawerVisible} onClose={onOpenDrawer} />
+      </div>
     </Wrapper>
   );
 }
