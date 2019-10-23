@@ -1,16 +1,16 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { secondary } from 'cssVariable';
+import { secondary, primary } from 'cssVariable';
 
 import MovieListContainer from 'components/MovieListContainer/index';
 
 const Wrapper = styled(MovieListContainer)`
   /* create a fixed width for slider container in order to bring
   a fast loading feeling to clients in case loading time of slider are congested */
-  min-height: 490px;
+  min-height: 260px;
 
   .list-item-container {
-    padding: 0 10px;
+    padding: 0 5px;
     position: relative;
 
     .progress-circle {
@@ -21,11 +21,16 @@ const Wrapper = styled(MovieListContainer)`
     }
 
     .movie-banner {
+      border: 4px solid transparent;
       display: block;
-      margin-bottom: 8px;
       width: 100%;
-      height: 290px;
+      height: 140px;
       object-fit: cover;
+      transition: 0.1s;
+
+      :hover {
+        border-color: ${primary};
+      }
     }
 
     h3 {

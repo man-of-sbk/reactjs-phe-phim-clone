@@ -14,15 +14,19 @@ import { compose } from 'redux';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
+import SmMovieList from 'components/SmMovieList/index';
 import LgMovieList from 'components/LgMovieList/index';
 
-import makeSelectHomePage from './selectors';
+import * as selectors from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
-export function HomePage() {
+export function HomePage({ app }) {
   useInjectReducer({ key: 'homePage', reducer });
   useInjectSaga({ key: 'homePage', saga });
+
+  // console.log(app.hotMovies);
+  // console.log(app.latestMovies);
 
   return (
     <>
@@ -31,7 +35,9 @@ export function HomePage() {
         <meta name="description" content="Description of HomePage" />
       </Helmet>
       <div className="container">
-        <LgMovieList />
+        <LgMovieList title="Đang Hót" movies={app.hotMovies} />
+        {/* <LgMovieList title="Sắp Chiếu" movies={app.latestMovies} /> */}
+        <SmMovieList title="Sắp Chiếu" movies={app.latestMovies} />
       </div>
     </>
   );
@@ -39,10 +45,12 @@ export function HomePage() {
 
 HomePage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  app: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  homePage: makeSelectHomePage(),
+  homePage: selectors.makeSelectHomePage(),
+  app: selectors.makeSelectApp(),
 });
 
 function mapDispatchToProps(dispatch) {

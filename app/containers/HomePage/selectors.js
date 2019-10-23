@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { initialState as appInitState } from 'containers/App/reducer';
 import { initialState } from './reducer';
 
 /**
@@ -6,7 +7,7 @@ import { initialState } from './reducer';
  */
 
 const selectHomePageDomain = state => state.homePage || initialState;
-
+const selectAppDomain = state => state.app || appInitState;
 /**
  * Other specific selectors
  */
@@ -21,5 +22,10 @@ const makeSelectHomePage = () =>
     substate => substate,
   );
 
-export default makeSelectHomePage;
-export { selectHomePageDomain };
+const makeSelectApp = () =>
+  createSelector(
+    selectAppDomain,
+    subState => subState,
+  );
+
+export { makeSelectHomePage, makeSelectApp };

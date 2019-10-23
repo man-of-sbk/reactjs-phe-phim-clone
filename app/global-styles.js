@@ -27,6 +27,10 @@ const GlobalStyle = createGlobalStyle`
       opacity: 1!important;
     }
   }
+
+  .ant-tooltip-inner {
+    text-align: center;
+  }
 `;
 
 export default GlobalStyle;

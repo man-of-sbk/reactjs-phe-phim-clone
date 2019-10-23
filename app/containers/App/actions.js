@@ -12,14 +12,28 @@ export function fetchMoviesAction() {
   };
 }
 
-export function fetchMoviesSuccessAction() {
+export function fetchHotMoviesSuccessAction(payloads) {
   return {
-    type: actionTypes.FETCH_MOVIES_SUCCESS_ACTION,
+    type: actionTypes.FETCH_HOT_MOVIES_SUCCESS_ACTION,
+    payloads,
   };
 }
 
-export function fetchMoviesFailedAction() {
+export function fetchHotMoviesFailedAction() {
   return {
-    type: actionTypes.FETCH_MOVIES_FAILED_ACTION,
+    type: actionTypes.FETCH_HOT_MOVIES_FAILED_ACTION,
+  };
+}
+
+export function fetchLatestMoviesSuccessAction(payloads) {
+  return {
+    type: actionTypes.FETCH_LATEST_MOVIES_SUCCESS_ACTION,
+    payloads,
+  };
+}
+
+export function fetchLatestMoviesFailedAction() {
+  return {
+    type: actionTypes.FETCH_LATESTMOVIES_FAILED_ACTION,
   };
 }
