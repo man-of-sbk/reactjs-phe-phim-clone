@@ -8,12 +8,11 @@
 	* #2 / #3: add a new function. 
 	* #4: fix / reinforce / update a function.
 	* #5: complete a function.
-## Convension
-* #### Use modularized antd:
+## Use modularized antd:
   * 1. install: https://www.npmjs.com/package/babel-plugin-import.
   * 2. add: `['import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }]` to `plugins` array in `babel.config.js`.
   * 3. import a component:
-    * `import Col from 'antd/lib/col'`
+    => `import Col from 'antd/lib/col'`.
 ## Package Warnings
  * ####  Moment.js:
 	 * `
