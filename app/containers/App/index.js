@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { Switch, Route } from 'react-router-dom';
-import { Layout } from 'antd';
+import Layout from 'antd/lib/layout';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
@@ -51,7 +51,9 @@ export function App({ dispatchFetchMovies }) {
             <Route component={NotFoundPage} />
           </Switch>
         </Layout.Content>
-        <Footer />
+        <Layout.Footer>
+          <Footer />
+        </Layout.Footer>
       </Wrapper>
       <GlobalStyle />
       <GlobalThemeStyles />

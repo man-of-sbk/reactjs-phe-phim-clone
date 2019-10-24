@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import styled from 'styled-components';
-import { Button as AntButton } from 'antd';
+import AntButton from 'antd/lib/button';
 
 // *** prevent styled-component pass props to generated DOM ele.
 // ***** READ MORE: => https://stackoverflow.com/questions/49834251/how-to-extend-styled-component-without-passing-props-to-underlying-dom-element

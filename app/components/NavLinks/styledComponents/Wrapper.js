@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { Menu } from 'antd';
+import Menu from 'antd/lib/menu';
 import { secondary } from 'cssVariable';
 import * as breakpoints from 'breakpoints';
 

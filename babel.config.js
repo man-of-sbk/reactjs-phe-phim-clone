@@ -12,6 +12,7 @@ module.exports = {
     'styled-components',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-syntax-dynamic-import',
+    ['import', { libraryName: 'antd', libraryDirectory: 'es', style: 'css' }],
   ],
   env: {
     production: {

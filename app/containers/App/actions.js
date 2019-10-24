@@ -34,6 +34,6 @@ export function fetchLatestMoviesSuccessAction(payloads) {
 
 export function fetchLatestMoviesFailedAction() {
   return {
-    type: actionTypes.FETCH_LATESTMOVIES_FAILED_ACTION,
+    type: actionTypes.FETCH_LATEST_MOVIES_FAILED_ACTION,
   };
 }

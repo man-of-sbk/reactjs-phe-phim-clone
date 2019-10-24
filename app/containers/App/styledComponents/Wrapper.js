@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { Layout } from 'antd';
+import Layout from 'antd/lib/layout';
 import { dark, lightOnDark } from 'cssVariable';
 // import * as breakpoints from 'breakpoints';
 
@@ -13,7 +13,8 @@ const Wrapper = styled(Layout)`
   }
 
   .ant-layout-header,
-  .ant-menu-root {
+  .ant-menu-root,
+  .ant-layout-footer {
     background: ${dark};
   }
 

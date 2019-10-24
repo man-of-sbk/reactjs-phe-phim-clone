@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Input as AntInput } from 'antd';
+import AntInput from 'antd/lib/input';
 
 const NormalInput = styled(AntInput)`
   color: #bcd;

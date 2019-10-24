@@ -6,7 +6,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Divider } from 'antd';
+import Divider from 'antd/lib/divider';
 
 import Wrapper from './styledComponents/Wrapper';
 // import styled from 'styled-components';

@@ -7,9 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { Tooltip } from 'antd';
+import Tooltip from 'antd/lib/tooltip';
 
-import { subStr } from 'utils/subStr';
 import { slideSettings } from './config';
 
 import Wrapper from './styledComponents/Wrapper';

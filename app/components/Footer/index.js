@@ -5,23 +5,22 @@
  */
 
 import React from 'react';
-import { Row, Col } from 'antd';
+import Col from 'antd/lib/col';
+
+import Wrapper from './styledComponents/Wrapper';
 // import PropTypes from 'prop-types';
 // import styled from 'styled-components';
 
 function Footer() {
   return (
-    <Row>
-      <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+    <Wrapper>
+      <Col xs={24} lg={12}>
         Col
       </Col>
-      <Col xs={20} sm={16} md={12} lg={8} xl={4}>
+      <Col xs={24} lg={12}>
         Col
       </Col>
-      <Col xs={2} sm={4} md={6} lg={8} xl={10}>
-        Col
-      </Col>
-    </Row>
+    </Wrapper>
   );
 }
 
