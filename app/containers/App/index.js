@@ -9,15 +9,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import Layout from 'antd/lib/layout';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
-import MainNavbar from 'components/MainNavbar/index';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import AuthPage from 'containers/AuthPage/Loadable';
+
+import MainNavbar from 'components/MainNavbar/index';
 import Footer from 'components/Footer/index';
 
 import GlobalStyle from 'global-styles';
@@ -31,7 +33,7 @@ import saga from './saga';
 
 import * as actions from './actions';
 
-export function App({ dispatchFetchMovies }) {
+export function App({ dispatchFetchMovies, location }) {
   useInjectReducer({ key: 'app', reducer });
   useInjectSaga({ key: 'app', saga });
 
@@ -39,21 +41,30 @@ export function App({ dispatchFetchMovies }) {
     dispatchFetchMovies();
   }, []);
 
+  const isInPageWithFullLayout =
+    location.pathname !== '/login' && location.pathname !== '/signup';
+
   return (
     <>
       <Wrapper>
-        <Layout.Header>
-          <MainNavbar />
-        </Layout.Header>
+        {isInPageWithFullLayout && (
+          <Layout.Header>
+            <MainNavbar />
+          </Layout.Header>
+        )}
         <Layout.Content>
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <Route path="/login" component={AuthPage} />
+            <Route path="/signup" component={AuthPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </Layout.Content>
-        <Layout.Footer>
-          <Footer />
-        </Layout.Footer>
+        {isInPageWithFullLayout && (
+          <Layout.Footer>
+            <Footer />
+          </Layout.Footer>
+        )}
       </Wrapper>
       <GlobalStyle />
       <GlobalThemeStyles />
@@ -63,6 +74,7 @@ export function App({ dispatchFetchMovies }) {
 
 App.propTypes = {
   dispatchFetchMovies: PropTypes.func.isRequired,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -80,4 +92,7 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-export default compose(withConnect)(App);
+export default compose(
+  withConnect,
+  withRouter,
+)(App);

@@ -10,21 +10,14 @@ import Icon from 'antd/lib/icon';
 
 import StyledButton from './styledComponents/Button';
 
-function Button({
-  children,
-  color,
-  iconType,
-  className,
-  borderColor,
-  onClick,
-}) {
+function Button({ children, color, iconType, borderColor, bordered, ...rest }) {
   return (
     <StyledButton
-      className={className}
       ghost
+      {...rest}
       color={color}
       borderColor={borderColor}
-      onClick={onClick}
+      bordered={bordered ? 1 : 0}
     >
       {iconType !== undefined && <Icon type={iconType} />}
       {children}
@@ -37,8 +30,7 @@ Button.propTypes = {
   color: PropTypes.string,
   iconType: PropTypes.string,
   borderColor: PropTypes.string,
-  className: PropTypes.string,
-  onClick: PropTypes.func,
+  bordered: PropTypes.bool,
 };
 
 Button.propTypes = {};

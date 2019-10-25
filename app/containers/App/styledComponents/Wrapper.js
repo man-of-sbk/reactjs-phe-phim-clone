@@ -1,10 +1,9 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import Layout from 'antd/lib/layout';
 import { dark, lightOnDark } from 'cssVariable';
 // import * as breakpoints from 'breakpoints';
 
-const Wrapper = styled(Layout)`
+const Wrapper = styled.div`
   .ant-layout-header {
     padding: 0;
     /* position: fixed;
@@ -13,12 +12,12 @@ const Wrapper = styled(Layout)`
   }
 
   .ant-layout-header,
-  .ant-menu-root,
-  .ant-layout-footer {
+  .ant-menu-root {
     background: ${dark};
   }
 
-  .ant-layout-content {
+  .ant-layout-content,
+  .ant-layout-footer {
     background: ${lightOnDark};
   }
 `;

@@ -10,3 +10,15 @@ export const requestFetchLatestMovies = () =>
   requests.get({
     url: '/movies?sort=3&order=2&page=1',
   });
+
+export const requestLogIn = inputVals =>
+  requests.post({
+    url: '/login',
+    data: inputVals,
+  });
+
+export const requestRegister = inputVals =>
+  requests.post({
+    url: '/register',
+    data: inputVals,
+  });

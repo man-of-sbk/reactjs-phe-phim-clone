@@ -6,14 +6,14 @@ export const slideSettings = {
   arrows: false,
   speed: 500,
   slidesToShow: 5,
-  slidesToScroll: 5,
+  slidesToScroll: 2,
   dots: true,
   responsive: [
     {
       breakpoint: breakpoints.lg,
       settings: {
         slidesToShow: 4,
-        slidesToScroll: 4,
+        slidesToScroll: 2,
       },
     },
     {

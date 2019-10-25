@@ -4,49 +4,35 @@
  *
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import AntInput from 'antd/lib/input';
 
-const NormalInput = styled(AntInput)`
-  color: #bcd;
-  background: #242d35;
-  border: ${props => (props.bordered ? `1px solid #456` : `0`)};
-  width: ${props => props.width};
+import { darkGrey, secondary } from 'cssVariable';
+// import React from 'react';
+// import PropTypes from 'prop-types';
+
+const Input = styled(AntInput)`
+  color: ${secondary};
+  background-color: #242d35!important;
+  border-color: ${darkGrey};
+  /* border: ${props => (props.bordered ? `1px solid #456` : `0`)}; */
+  /* width: ${props => props.width}; */
 
   &::placeholder {
-    color: #bcd;
+    color: ${secondary};
     opacity: 1;
   }
-`;
 
-const SearchInput = styled(AntInput.Search)`
-  input {
-    color: #bcd;
-    background: #242d35;
-    border: ${props => (props.bordered ? `1px solid #456` : `0`)};
-    width: ${props => props.width};
-    border-radius: 50px;
-
-    &::placeholder {
-      color: #bcd;
-      opacity: 1;
-    }
+  /* in case this is treated with prefix property */
+  .ant-input {
+    color: ${secondary};
+    background-color: #242d35!important;
+    border-color: ${darkGrey};
   }
 
-  .anticon-search {
-    color: #bcd;
-    margin: 0;
+  .ant-input-prefix {
+    color: ${secondary};
   }
 `;
-
-function Input({ search, ...rest }) {
-  return search ? <SearchInput {...rest} /> : <NormalInput {...rest} />;
-}
-
-Input.propTypes = {
-  search: PropTypes.bool,
-};
 
 export default Input;
