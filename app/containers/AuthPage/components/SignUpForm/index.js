@@ -10,12 +10,12 @@ import PropTypes from 'prop-types';
 import Form from 'antd/lib/form';
 import Icon from 'antd/lib/icon';
 
-import { withPwdConfirmationForm } from 'utils/withPwdConfirmationForm';
+import { withPwdConfirmationForm } from 'utils/formHandlers/withPwdConfirmationForm';
+import { updateFieldsErrors } from 'utils/formHandlers/updateFieldsErrors';
 
 import Input from 'components/Input/index';
 import FormFooter from '../FormFooter/index';
 
-import { updateFieldsErrors } from './utils/updateFieldsErrors';
 import * as inputsSettings from './constants';
 
 const { Item } = Form;

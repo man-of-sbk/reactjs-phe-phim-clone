@@ -1,6 +1,6 @@
 export const updateFieldsErrors = (errorsFromServer, antdFormInstance) => {
   if (!errorsFromServer) return;
-  console.log(antdFormInstance);
+
   const res = {};
 
   // *** sculpt 'res' obj to match the arg of antd's .setFields() method
