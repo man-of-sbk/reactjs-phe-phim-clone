@@ -21,5 +21,4 @@ const makeSelectApp = () =>
     substate => substate,
   );
 
-export default makeSelectApp;
-export { selectAppDomain };
+export { makeSelectApp };

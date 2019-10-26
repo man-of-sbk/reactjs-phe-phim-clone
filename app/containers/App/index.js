@@ -25,24 +25,35 @@ import Footer from 'components/Footer/index';
 import GlobalStyle from 'global-styles';
 import GlobalThemeStyles from 'global-theme-styles';
 
+import LoadingPage from 'containers/LoadingPage/index';
 import Wrapper from './styledComponents/Wrapper';
 
-import makeSelectApp from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import * as selectors from './selectors';
 import * as actions from './actions';
 
-export function App({ dispatchFetchMovies, location }) {
+export function App({
+  dispatchFetchMovies,
+  location,
+  app,
+  dispatchAuthorizeUser,
+}) {
   useInjectReducer({ key: 'app', reducer });
   useInjectSaga({ key: 'app', saga });
 
   useEffect(() => {
     dispatchFetchMovies();
+    dispatchAuthorizeUser();
   }, []);
 
   const isInPageWithFullLayout =
     location.pathname !== '/login' && location.pathname !== '/signup';
+
+  if (app.isAuthorizingUser) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -74,16 +85,19 @@ export function App({ dispatchFetchMovies, location }) {
 
 App.propTypes = {
   dispatchFetchMovies: PropTypes.func.isRequired,
-  location: PropTypes.object,
+  app: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  dispatchAuthorizeUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  app: makeSelectApp(),
+  app: selectors.makeSelectApp(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatchFetchMovies: () => dispatch(actions.fetchMoviesAction()),
+    dispatchAuthorizeUser: () => dispatch(actions.authorizeUserAction()),
   };
 }
 

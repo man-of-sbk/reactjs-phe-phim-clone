@@ -22,3 +22,8 @@ export const requestRegister = inputVals =>
     url: '/register',
     data: inputVals,
   });
+
+export const requestAuthorizeUser = () =>
+  requests.get({
+    url: '/user',
+  });

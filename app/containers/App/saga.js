@@ -4,6 +4,7 @@ import { isResponseFailed } from 'services/handleResponse';
 import {
   requestFetchHotMovies,
   requestFetchLatestMovies,
+  requestAuthorizeUser,
 } from 'services/requestMethods';
 
 import * as actionTypes from './constants';
@@ -33,7 +34,20 @@ function* fetchMoviesFlow() {
   yield fork(fetchHotMovies);
   yield fork(fetchLatestMovies);
 }
-// Individual exports for testing
+
+function* authorizeUser() {
+  const response = yield call(requestAuthorizeUser);
+
+  if (isResponseFailed(response)) {
+    yield put(actions.authorizeUserFailedAction());
+  } else {
+    yield put(actions.authorizeUserSuccessAction());
+  }
+}
+
 export default function* appSaga() {
-  yield all([takeLatest(actionTypes.FETCH_MOVIES_ACTION, fetchMoviesFlow)]);
+  yield all([
+    takeLatest(actionTypes.FETCH_MOVIES_ACTION, fetchMoviesFlow),
+    takeLatest(actionTypes.AUTHORIZE_USER_ACTION, authorizeUser),
+  ]);
 }

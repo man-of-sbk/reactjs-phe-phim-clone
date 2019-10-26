@@ -14,6 +14,8 @@ import { Switch, Route } from 'react-router-dom';
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
 
+import { makeSelectApp as app } from 'containers/App/selectors';
+
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
 import Wrapper from './styledComponents/Wrapper';
@@ -25,9 +27,13 @@ import saga from './saga';
 
 import * as actions from './actions';
 
-export function AuthPage() {
+export function AuthPage({ history }) {
   useInjectReducer({ key: 'authPage', reducer });
   useInjectSaga({ key: 'authPage', saga });
+
+  if (app.user) {
+    history.replace('/');
+  }
 
   return (
     <Wrapper>
@@ -43,6 +49,7 @@ export function AuthPage() {
 
 AuthPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

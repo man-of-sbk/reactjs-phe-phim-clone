@@ -37,3 +37,21 @@ export function fetchLatestMoviesFailedAction() {
     type: actionTypes.FETCH_LATEST_MOVIES_FAILED_ACTION,
   };
 }
+
+export function authorizeUserAction() {
+  return {
+    type: actionTypes.AUTHORIZE_USER_ACTION,
+  };
+}
+
+export function authorizeUserSuccessAction() {
+  return {
+    type: actionTypes.AUTHORIZE_USER_SUCCESS_ACTION,
+  };
+}
+
+export function authorizeUserFailedAction() {
+  return {
+    type: actionTypes.AUTHORIZE_USER_FAILED_ACTION,
+  };
+}
