@@ -27,12 +27,15 @@ function SignUpForm({
   compareToPwdConfirmation,
   onSubmit,
   submitInfo,
+  history,
 }) {
+  if (submitInfo.submitSuccess) {
+    history.push('/login');
+  }
+
   const handleSubmit = async e => {
     e.preventDefault();
-
     const validateRes = await form.validateFields();
-    // console.log(validateRes);
     onSubmit(validateRes);
   };
 
@@ -82,6 +85,7 @@ SignUpForm.propTypes = {
   compareToPwdConfirmation: PropTypes.func,
   onSubmit: PropTypes.func,
   submitInfo: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default withPwdConfirmationForm({

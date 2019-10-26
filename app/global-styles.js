@@ -31,6 +31,10 @@ const GlobalStyle = createGlobalStyle`
   .ant-tooltip-inner {
     text-align: center;
   }
+
+  .ant-message .anticon {
+    vertical-align: 2px;
+  }
 `;
 
 export default GlobalStyle;

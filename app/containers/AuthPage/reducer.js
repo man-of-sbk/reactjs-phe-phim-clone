@@ -3,7 +3,7 @@
  * AuthPage reducer
  *
  */
-import produce, { isDraft } from 'immer';
+import produce from 'immer';
 import * as actionTypes from './constants';
 
 export const initialState = {
@@ -43,6 +43,10 @@ const authPageReducer = (state = initialState, action) =>
       case actionTypes.SIGN_UP_FAILED_ACTION:
         draft.errors = action.payloads;
         draft.isSubmitting = false;
+        draft.submitSuccess = false;
+        break;
+
+      case actionTypes.RESET_SUBMIT_SUCCESS_ACTION:
         draft.submitSuccess = false;
         break;
     }

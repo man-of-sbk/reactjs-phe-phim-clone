@@ -45,3 +45,9 @@ export function signUpFailedAction(payloads) {
     payloads,
   };
 }
+
+export function resetSubmitSuccessAction() {
+  return {
+    type: actionTypes.RESET_SUBMIT_SUCCESS_ACTION,
+  };
+}

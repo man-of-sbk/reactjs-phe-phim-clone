@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Form from 'antd/lib/form';
+import message from 'antd/lib/message';
 import Icon from 'antd/lib/icon';
 
 import PasswordInput from 'components/PasswordInput/index';
@@ -18,14 +19,17 @@ import * as inputsSettings from './constants';
 
 const { Item } = Form;
 
-function LoginForm({ form, onSubmit }) {
+function LoginForm({ form, onSubmit, submitInfo, resetSubmitSuccess }) {
   const handleSubmit = async e => {
     e.preventDefault();
-
     const validateRes = await form.validateFields();
-    // console.log(validateRes);
     onSubmit(validateRes);
   };
+
+  if (submitInfo.submitSuccess) {
+    message.success('Đăng ký thành công');
+    resetSubmitSuccess();
+  }
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -63,6 +67,8 @@ function LoginForm({ form, onSubmit }) {
 LoginForm.propTypes = {
   form: PropTypes.object,
   onSubmit: PropTypes.func,
+  submitInfo: PropTypes.object.isRequired,
+  resetSubmitSuccess: PropTypes.func.isRequired,
 };
 
 export default Form.create({ name: 'login_form' })(LoginForm);

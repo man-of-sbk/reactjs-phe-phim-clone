@@ -21,5 +21,4 @@ const makeSelectAuthPage = () =>
     substate => substate,
   );
 
-export default makeSelectAuthPage;
-export { selectAuthPageDomain };
+export { selectAuthPageDomain, makeSelectAuthPage };
