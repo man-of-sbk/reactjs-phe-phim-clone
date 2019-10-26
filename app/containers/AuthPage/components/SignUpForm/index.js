@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Form from 'antd/lib/form';
@@ -15,6 +15,7 @@ import { withPwdConfirmationForm } from 'utils/withPwdConfirmationForm';
 import Input from 'components/Input/index';
 import FormFooter from '../FormFooter/index';
 
+import { updateFieldsErrors } from './utils/updateFieldsErrors';
 import * as inputsSettings from './constants';
 
 const { Item } = Form;
@@ -24,16 +25,26 @@ function SignUpForm({
   onPwdConfirmationBlur,
   compareToPwd,
   compareToPwdConfirmation,
+  onSubmit,
+  submitInfo,
 }) {
-  const onSubmit = async e => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const validateRes = await form.validateFields();
-    console.log(validateRes);
+    // console.log(validateRes);
+    onSubmit(validateRes);
   };
 
+  useEffect(() => {
+    const { errors } = submitInfo;
+    if (!errors) return;
+
+    updateFieldsErrors(errors, form);
+  }, [submitInfo.errors]);
+
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={handleSubmit}>
       {inputsSettings.inputs.map(input => (
         <Item key={input.name}>
           {form.getFieldDecorator(input.name, {
@@ -69,6 +80,8 @@ SignUpForm.propTypes = {
   onPwdConfirmationBlur: PropTypes.func,
   compareToPwd: PropTypes.func,
   compareToPwdConfirmation: PropTypes.func,
+  onSubmit: PropTypes.func,
+  submitInfo: PropTypes.object.isRequired,
 };
 
 export default withPwdConfirmationForm({

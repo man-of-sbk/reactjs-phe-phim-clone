@@ -18,17 +18,17 @@ import * as inputsSettings from './constants';
 
 const { Item } = Form;
 
-function LoginForm({ form }) {
-  const onSubmit = async e => {
+function LoginForm({ form, onSubmit }) {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const validateRes = await form.validateFields();
-
-    console.log(validateRes);
+    // console.log(validateRes);
+    onSubmit(validateRes);
   };
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form onSubmit={handleSubmit}>
       {inputsSettings.inputs.map(input => (
         <Item key={input.name}>
           {form.getFieldDecorator(input.name, {
@@ -62,6 +62,7 @@ function LoginForm({ form }) {
 
 LoginForm.propTypes = {
   form: PropTypes.object,
+  onSubmit: PropTypes.func,
 };
 
 export default Form.create({ name: 'login_form' })(LoginForm);

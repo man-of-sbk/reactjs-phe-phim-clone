@@ -9,7 +9,7 @@ export const withPwdConfirmationForm = ({
   errorMessage,
   pwdConfirmationFieldName,
 }) => Component => {
-  function Wrapper({ form }) {
+  function Wrapper({ form, ...rest }) {
     const [isPwdConfirmDirty, setIsPwdConfirmDirty] = useState(false);
 
     const onPwdConfirmBlur = () => {
@@ -33,6 +33,7 @@ export const withPwdConfirmationForm = ({
 
     return (
       <Component
+        {...rest}
         form={form}
         onPwdConfirmationBlur={onPwdConfirmBlur}
         // isPwdConfirmDirty={isPwdConfirmDirty}

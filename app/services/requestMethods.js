@@ -11,16 +11,16 @@ export const requestFetchLatestMovies = () =>
     url: '/movies?sort=3&order=2&page=1',
   });
 
-export const requestLogIn = inputVals =>
+export const requestLogIn = data =>
   requests.post({
     url: '/login',
-    data: inputVals,
+    data,
   });
 
-export const requestRegister = inputVals =>
+export const requestRegister = data =>
   requests.post({
     url: '/register',
-    data: inputVals,
+    data,
   });
 
 export const requestAuthorizeUser = () =>

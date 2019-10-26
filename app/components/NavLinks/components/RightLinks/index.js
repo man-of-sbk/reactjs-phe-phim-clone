@@ -5,8 +5,8 @@ import { primary, darkGrey, secondary } from 'cssVariable';
 
 import { makeSelectApp as app } from 'containers/App/selectors';
 
-import AvatarSection from './components/AvatarSection/index';
 import Button from 'components/Button/index';
+import AvatarSection from './components/AvatarSection/index';
 
 function RightLinks() {
   return (

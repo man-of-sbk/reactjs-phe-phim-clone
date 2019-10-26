@@ -6,29 +6,29 @@
 
 import * as actionTypes from './constants';
 
-export function logInAction() {
+export function logInAction(payloads) {
   return {
     type: actionTypes.LOGIN_IN_ACTION,
+    payloads,
   };
 }
 
-export function logInSuccessAction(payloads) {
+export function logInSuccessAction() {
   return {
     type: actionTypes.LOGIN_IN_SUCCESS_ACTION,
-    payloads,
   };
 }
 
-export function logInFailedAction(payloads) {
+export function logInFailedAction() {
   return {
     type: actionTypes.LOGIN_IN_FAILED_ACTION,
-    payloads,
   };
 }
 
-export function signUpAction() {
+export function signUpAction(payloads) {
   return {
     type: actionTypes.SIGN_UP_ACTION,
+    payloads,
   };
 }
 

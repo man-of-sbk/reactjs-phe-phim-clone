@@ -27,20 +27,32 @@ import saga from './saga';
 
 import * as actions from './actions';
 
-export function AuthPage({ history }) {
+export function AuthPage({ history, dispatchLogIn, dispatchSignUp, authPage }) {
   useInjectReducer({ key: 'authPage', reducer });
   useInjectSaga({ key: 'authPage', saga });
 
   if (app.user) {
     history.replace('/');
   }
-
+  // console.log(authPage.errors);
   return (
     <Wrapper>
       <FormContainer>
         <Switch>
-          <Route path="/login" component={LoginForm} />
-          <Route path="/signup" component={SignUpForm} />
+          <Route
+            path="/login"
+            render={props => <LoginForm {...props} onSubmit={dispatchLogIn} />}
+          />
+          <Route
+            path="/signup"
+            render={props => (
+              <SignUpForm
+                {...props}
+                onSubmit={dispatchSignUp}
+                submitInfo={authPage}
+              />
+            )}
+          />
         </Switch>
       </FormContainer>
     </Wrapper>
@@ -48,8 +60,10 @@ export function AuthPage({ history }) {
 }
 
 AuthPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  dispatchLogIn: PropTypes.func.isRequired,
+  dispatchSignUp: PropTypes.func.isRequired,
+  authPage: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -58,7 +72,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    dispatchLogIn: payloads => dispatch(actions.logInAction(payloads)),
+    dispatchSignUp: payloads => dispatch(actions.signUpAction(payloads)),
   };
 }
 
