@@ -17,10 +17,6 @@ export const initialState = {
   AuthorizeUserSuccess: false,
 };
 
-const saveToken = token => {
-  localStorage.setItem(accessToken, token);
-};
-
 /* eslint-disable default-case, no-param-reassign */
 const appReducer = (state = initialState, action) =>
   produce(state, draft => {
@@ -52,8 +48,6 @@ const appReducer = (state = initialState, action) =>
         break;
 
       case actionTypes.AUTHORIZE_USER_SUCCESS_ACTION:
-        saveToken(action.payloads);
-
         draft.user = action.payloads;
         draft.AuthorizeUserSuccess = true;
         draft.isAuthorizingUser = false;
@@ -63,6 +57,11 @@ const appReducer = (state = initialState, action) =>
         draft.user = undefined;
         draft.AuthorizeUserSuccess = false;
         draft.isAuthorizingUser = false;
+        break;
+
+      case actionTypes.SIGN_OUT_ACTION:
+        localStorage.removeItem(accessToken);
+        draft.user = undefined;
         break;
     }
   });

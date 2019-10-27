@@ -36,12 +36,13 @@ function* fetchMoviesFlow() {
 }
 
 function* authorizeUser() {
+  // console.log('start authorizing');
   const response = yield call(requestAuthorizeUser);
 
   if (isResponseFailed(response)) {
     yield put(actions.authorizeUserFailedAction());
   } else {
-    yield put(actions.authorizeUserSuccessAction());
+    yield put(actions.authorizeUserSuccessAction(response.data));
   }
 }
 

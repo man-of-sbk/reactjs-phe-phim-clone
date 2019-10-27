@@ -12,7 +12,7 @@ import Wrapper from './styledComponents/Wrapper';
 // import RightNavbar from 'components/RightNavbar/index';
 // import styled from 'styled-components';
 
-function NavbarDrawer({ onClose, visible }) {
+function NavbarDrawer({ onClose, visible, user, onSignOut }) {
   return (
     <Wrapper
       width={340}
@@ -22,8 +22,7 @@ function NavbarDrawer({ onClose, visible }) {
       visible={visible}
       onClose={onClose}
     >
-      <NavLinks mode="vertical" />
-      {/* <RightNavbar /> */}
+      <NavLinks mode="vertical" user={user} onSignOut={onSignOut} />
     </Wrapper>
   );
 }
@@ -31,6 +30,8 @@ function NavbarDrawer({ onClose, visible }) {
 NavbarDrawer.propTypes = {
   onClose: PropTypes.func,
   visible: PropTypes.bool,
+  user: PropTypes.object,
+  onSignOut: PropTypes.func.isRequired,
 };
 
 export default NavbarDrawer;

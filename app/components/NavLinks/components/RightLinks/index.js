@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
+import Proptypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { primary, darkGrey, secondary } from 'cssVariable';
 
-import { makeSelectApp as app } from 'containers/App/selectors';
+// import { makeSelectApp as app } from 'containers/App/selectors';
 
 import Button from 'components/Button/index';
 import AvatarSection from './components/AvatarSection/index';
 
-function RightLinks() {
+function RightLinks({ user }) {
+  console.log(user);
   return (
     <>
       <Button
@@ -21,17 +23,19 @@ function RightLinks() {
         <NavLink to="/">Viết bài</NavLink>
       </Button>
 
-      {app.user ? (
+      {user ? (
         <AvatarSection />
       ) : (
         <Button borderColor={darkGrey} color={secondary} bordered>
           <NavLink to="/login">Đăng nhập</NavLink>
         </Button>
       )}
-
-      {/* <AvatarSection /> */}
     </>
   );
 }
+
+RightLinks.propTypes = {
+  user: Proptypes.object,
+};
 
 export default RightLinks;

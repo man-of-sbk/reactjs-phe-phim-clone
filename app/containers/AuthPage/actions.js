@@ -51,3 +51,9 @@ export function resetSubmitSuccessAction() {
     type: actionTypes.RESET_SUBMIT_SUCCESS_ACTION,
   };
 }
+
+export function resetSubmitFailedAction() {
+  return {
+    type: actionTypes.RESET_SUBMIT_FAILED_ACTION,
+  };
+}

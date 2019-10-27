@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 import Menu from 'antd/lib/menu';
-import { secondary } from 'cssVariable';
+import { secondary, primary } from 'cssVariable';
 import * as breakpoints from 'breakpoints';
 
 const Wrapper = styled(Menu)`
@@ -23,6 +23,22 @@ const Wrapper = styled(Menu)`
 
     > * {
       margin-left: 10px;
+    }
+
+    .ant-dropdown-trigger {
+      margin-top: -16px;
+      margin-left: 20px;
+      height: 50px;
+      color: ${primary};
+
+      .avatar-name {
+        margin-left: 10px;
+
+        .anticon {
+          vertical-align: 2px;
+          margin: 0;
+        }
+      }
     }
   }
 
@@ -52,6 +68,15 @@ const Wrapper = styled(Menu)`
       > i {
         margin: ${props => props.mode === 'horizontal' && `0`};
         font-size: ${props => props.mode === 'horizontal' && `20px`};
+      }
+    }
+
+    .right-links-container .ant-dropdown-trigger {
+      margin-top: 0;
+      height: initial;
+
+      .avatar-name {
+        display: none;
       }
     }
   }

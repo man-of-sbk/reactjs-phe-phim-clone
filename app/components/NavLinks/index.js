@@ -12,15 +12,15 @@ import { Menu } from 'antd';
 
 // import Input from 'components/Input/index';
 // import Button from 'components/Button/index';
-import SearchBar from './components/SearchBar';
-import RightLinks from './components/RightLinks';
+import SearchBar from './components/SearchBar/index';
+import RightLinks from './components/RightLinks/index';
 
 import Wrapper from './styledComponents/Wrapper';
 
 // import styled from 'styled-components';
 import { links } from './config';
 
-function NavLinks({ mode }) {
+function NavLinks({ mode, user, onSignOut }) {
   return (
     <Wrapper className={mode === `horizontal` && `d-flex-ni`} mode={mode}>
       {links.map((link, index) => (
@@ -34,7 +34,7 @@ function NavLinks({ mode }) {
       </Menu.Item>
 
       <Menu.Item className="right-links-container">
-        <RightLinks />
+        <RightLinks user={user} onSignOut={onSignOut} />
       </Menu.Item>
     </Wrapper>
   );
@@ -42,6 +42,8 @@ function NavLinks({ mode }) {
 
 NavLinks.propTypes = {
   mode: PropTypes.string.isRequired,
+  user: PropTypes.object,
+  onSignOut: PropTypes.func,
 };
 
 export default NavLinks;

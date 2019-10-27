@@ -44,14 +44,21 @@ export function authorizeUserAction() {
   };
 }
 
-export function authorizeUserSuccessAction() {
+export function authorizeUserSuccessAction(payloads) {
   return {
     type: actionTypes.AUTHORIZE_USER_SUCCESS_ACTION,
+    payloads,
   };
 }
 
 export function authorizeUserFailedAction() {
   return {
     type: actionTypes.AUTHORIZE_USER_FAILED_ACTION,
+  };
+}
+
+export function signOutAction() {
+  return {
+    type: actionTypes.SIGN_OUT_ACTION,
   };
 }

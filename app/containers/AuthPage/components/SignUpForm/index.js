@@ -29,22 +29,26 @@ function SignUpForm({
   submitInfo,
   history,
 }) {
-  if (submitInfo.submitSuccess) {
-    history.push('/login');
-  }
-
   const handleSubmit = async e => {
     e.preventDefault();
     const validateRes = await form.validateFields();
     onSubmit(validateRes);
   };
 
-  useEffect(() => {
-    const { errors } = submitInfo;
-    if (!errors) return;
+  const handleErrorFromServer = () => {
+    const { signUpErrors } = submitInfo;
+    if (!signUpErrors) return;
 
-    updateFieldsErrors(errors, form);
-  }, [submitInfo.errors]);
+    updateFieldsErrors(signUpErrors, form);
+  };
+
+  useEffect(() => {
+    if (submitInfo.signUpSuccess) {
+      history.push('/login');
+    }
+
+    handleErrorFromServer();
+  }, [submitInfo.signUpErrors, submitInfo.signUpSuccess]);
 
   return (
     <Form onSubmit={handleSubmit}>

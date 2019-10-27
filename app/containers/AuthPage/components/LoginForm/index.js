@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import Form from 'antd/lib/form';
@@ -19,17 +19,41 @@ import * as inputsSettings from './constants';
 
 const { Item } = Form;
 
-function LoginForm({ form, onSubmit, submitInfo, resetSubmitSuccess }) {
+function LoginForm({
+  form,
+  onSubmit,
+  submitInfo,
+  resetSubmitSuccess,
+  resetSubmitFailed,
+  history,
+}) {
   const handleSubmit = async e => {
     e.preventDefault();
     const validateRes = await form.validateFields();
     onSubmit(validateRes);
   };
 
-  if (submitInfo.submitSuccess) {
-    message.success('Đăng ký thành công');
-    resetSubmitSuccess();
-  }
+  useEffect(() => {
+    if (submitInfo.logInErrors) {
+      message.error('Đăng nhập không thành công');
+      resetSubmitFailed();
+    }
+
+    if (submitInfo.signUpSuccess) {
+      message.success('Đăng ký thành công');
+      resetSubmitSuccess();
+    }
+
+    if (submitInfo.logInSuccess) {
+      message.success('Đăng nhập thành công');
+      resetSubmitSuccess();
+      history.replace('/');
+    }
+  }, [
+    submitInfo.logInErrors,
+    submitInfo.signUpSuccess,
+    submitInfo.logInSuccess,
+  ]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -69,6 +93,8 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func,
   submitInfo: PropTypes.object.isRequired,
   resetSubmitSuccess: PropTypes.func.isRequired,
+  resetSubmitFailed: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default Form.create({ name: 'login_form' })(LoginForm);

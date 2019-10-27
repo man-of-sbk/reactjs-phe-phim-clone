@@ -39,6 +39,7 @@ export function App({
   location,
   app,
   dispatchAuthorizeUser,
+  dispatchSignOut,
 }) {
   useInjectReducer({ key: 'app', reducer });
   useInjectSaga({ key: 'app', saga });
@@ -60,7 +61,7 @@ export function App({
       <Wrapper>
         {isInPageWithFullLayout && (
           <Layout.Header>
-            <MainNavbar />
+            <MainNavbar user={app.user} onSignOut={dispatchSignOut} />
           </Layout.Header>
         )}
         <Layout.Content>
@@ -88,6 +89,7 @@ App.propTypes = {
   app: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   dispatchAuthorizeUser: PropTypes.func.isRequired,
+  dispatchSignOut: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -98,6 +100,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatchFetchMovies: () => dispatch(actions.fetchMoviesAction()),
     dispatchAuthorizeUser: () => dispatch(actions.authorizeUserAction()),
+    dispatchSignOut: () => dispatch(actions.signOutAction()),
   };
 }
 

@@ -36,6 +36,7 @@ export function AuthPage({
   authPage,
   app,
   dispatchResetSubmitSuccess,
+  dispatchResetSubmitFailed,
 }) {
   useInjectReducer({ key: 'authPage', reducer });
   useInjectSaga({ key: 'authPage', saga });
@@ -55,6 +56,7 @@ export function AuthPage({
                   onSubmit={dispatchLogIn}
                   submitInfo={authPage}
                   resetSubmitSuccess={dispatchResetSubmitSuccess}
+                  resetSubmitFailed={dispatchResetSubmitFailed}
                 />
               )}
             />
@@ -82,6 +84,7 @@ AuthPage.propTypes = {
   authPage: PropTypes.object.isRequired,
   app: PropTypes.object.isRequired,
   dispatchResetSubmitSuccess: PropTypes.func.isRequired,
+  dispatchResetSubmitFailed: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -95,6 +98,8 @@ function mapDispatchToProps(dispatch) {
     dispatchSignUp: payloads => dispatch(actions.signUpAction(payloads)),
     dispatchResetSubmitSuccess: () =>
       dispatch(actions.resetSubmitSuccessAction()),
+    dispatchResetSubmitFailed: () =>
+      dispatch(actions.resetSubmitFailedAction()),
   };
 }
 
