@@ -7,12 +7,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import NavLinks from 'components/NavLinks/index';
+import NavLinks from 'containers/NavLinks/index';
 import Wrapper from './styledComponents/Wrapper';
 // import RightNavbar from 'components/RightNavbar/index';
 // import styled from 'styled-components';
 
-function NavbarDrawer({ onClose, visible, user, onSignOut }) {
+function NavbarDrawer({ onClose, visible }) {
   return (
     <Wrapper
       width={340}
@@ -22,7 +22,7 @@ function NavbarDrawer({ onClose, visible, user, onSignOut }) {
       visible={visible}
       onClose={onClose}
     >
-      <NavLinks mode="vertical" user={user} onSignOut={onSignOut} />
+      <NavLinks mode="vertical" />
     </Wrapper>
   );
 }
@@ -30,8 +30,6 @@ function NavbarDrawer({ onClose, visible, user, onSignOut }) {
 NavbarDrawer.propTypes = {
   onClose: PropTypes.func,
   visible: PropTypes.bool,
-  user: PropTypes.object,
-  onSignOut: PropTypes.func.isRequired,
 };
 
 export default NavbarDrawer;

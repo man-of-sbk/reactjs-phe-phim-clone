@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import NavLinks from 'components/NavLinks/index';
+import NavLinks from 'containers/NavLinks/index';
 import NavbarHamburger from 'components/NavbarHamburger/index';
 import Logo from 'components/Logo/index';
 import NavbarDrawer from 'components/NavbarDrawer/index';
@@ -15,7 +15,7 @@ import NavbarDrawer from 'components/NavbarDrawer/index';
 import Wrapper from './styledComponents/Wrapper';
 // import styled from 'styled-components';
 
-function MainNavbar({ user, onSignOut }) {
+function MainNavbar() {
   const [drawerVisible, setDrawerVisible] = useState(false);
 
   const onOpenDrawer = () => {
@@ -26,27 +26,14 @@ function MainNavbar({ user, onSignOut }) {
     <Wrapper className="clearfix">
       <div className="container h-100">
         <Logo />
-        <NavLinks
-          className="float-left"
-          mode="horizontal"
-          user={user}
-          onSignOut={onSignOut}
-        />
+        <NavLinks className="float-left" mode="horizontal" />
         <NavbarHamburger onClick={onOpenDrawer} />
-        <NavbarDrawer
-          visible={drawerVisible}
-          onClose={onOpenDrawer}
-          user={user}
-          onSignOut={onSignOut}
-        />
+        <NavbarDrawer visible={drawerVisible} onClose={onOpenDrawer} />
       </div>
     </Wrapper>
   );
 }
 
-MainNavbar.propTypes = {
-  user: PropTypes.object,
-  onSignOut: PropTypes.func.isRequired,
-};
+MainNavbar.propTypes = {};
 
 export default MainNavbar;

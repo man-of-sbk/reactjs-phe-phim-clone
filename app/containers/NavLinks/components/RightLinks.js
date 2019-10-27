@@ -7,10 +7,9 @@ import { primary, darkGrey, secondary } from 'cssVariable';
 // import { makeSelectApp as app } from 'containers/App/selectors';
 
 import Button from 'components/Button/index';
-import AvatarSection from './components/AvatarSection/index';
+import AvatarSection from './AvatarSection';
 
-function RightLinks({ user }) {
-  console.log(user);
+function RightLinks({ user, onSignOut }) {
   return (
     <>
       <Button
@@ -24,7 +23,7 @@ function RightLinks({ user }) {
       </Button>
 
       {user ? (
-        <AvatarSection />
+        <AvatarSection onSignOut={onSignOut} />
       ) : (
         <Button borderColor={darkGrey} color={secondary} bordered>
           <NavLink to="/login">Đăng nhập</NavLink>
@@ -36,6 +35,7 @@ function RightLinks({ user }) {
 
 RightLinks.propTypes = {
   user: Proptypes.object,
+  onSignOut: Proptypes.func.isRequired,
 };
 
 export default RightLinks;
