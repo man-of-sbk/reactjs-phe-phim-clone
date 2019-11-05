@@ -7,13 +7,13 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-import Form from 'antd/lib/form';
-import Icon from 'antd/lib/icon';
-
 import { withPwdConfirmationForm } from 'utils/formHandlers/withPwdConfirmationForm';
 import { updateFieldsErrors } from 'utils/formHandlers/updateFieldsErrors';
 
-import Input from 'components/Input/index';
+import Form from 'antd/lib/form';
+import Input from 'antd/lib/input';
+import Icon from 'antd/lib/icon';
+
 import FormFooter from '../FormFooter/index';
 
 import * as inputsSettings from './constants';
@@ -61,22 +61,34 @@ function SignUpForm({
                 : input.name === 'password' && compareToPwdConfirmation,
             ),
           })(
-            <Input
-              autoComplete="off"
-              prefix={<Icon type={input.icon} />}
-              placeholder={input.placeholder}
-              name={input.name}
-              type={input.type}
-              onBlur={
-                input.name === 'password_confirmation'
-                  ? onPwdConfirmationBlur
-                  : () => {}
-              }
-            />,
+            input.type === 'password' ? (
+              <Input.Password
+                className="form-control"
+                autoComplete="off"
+                prefix={<Icon type={input.icon} />}
+                placeholder={input.placeholder}
+                name={input.name}
+                type={input.type}
+                // *** check password_confirmation when password field changes
+                onBlur={
+                  input.name === 'password_confirmation'
+                    ? onPwdConfirmationBlur
+                    : () => {}
+                }
+              />
+            ) : (
+              <Input
+                className="form-control"
+                autoComplete="off"
+                prefix={<Icon type={input.icon} />}
+                placeholder={input.placeholder}
+                name={input.name}
+                type={input.type}
+              />
+            ),
           )}
         </Item>
       ))}
-
       <FormFooter />
     </Form>
   );

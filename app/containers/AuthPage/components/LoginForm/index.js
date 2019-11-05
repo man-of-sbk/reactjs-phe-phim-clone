@@ -10,9 +10,8 @@ import PropTypes from 'prop-types';
 import Form from 'antd/lib/form';
 import message from 'antd/lib/message';
 import Icon from 'antd/lib/icon';
+import Input from 'antd/lib/input';
 
-import PasswordInput from 'components/PasswordInput/index';
-import Input from 'components/Input/index';
 import FormFooter from '../FormFooter/index';
 
 import * as inputsSettings from './constants';
@@ -26,6 +25,7 @@ function LoginForm({
   resetSubmitSuccess,
   resetSubmitFailed,
   history,
+  location,
 }) {
   const handleSubmit = async e => {
     e.preventDefault();
@@ -44,7 +44,10 @@ function LoginForm({
       resetSubmitSuccess();
     }
 
-    if (submitInfo.logInSuccess) {
+    if (
+      submitInfo.logInSuccess &&
+      (location.state && !location.state.requestFromProfile)
+    ) {
       message.success('Đăng nhập thành công');
       resetSubmitSuccess();
       history.replace('/');
@@ -63,7 +66,8 @@ function LoginForm({
             rules: input.rules,
           })(
             input.type === 'password' ? (
-              <PasswordInput
+              <Input.Password
+                className="form-control"
                 autoComplete="off"
                 prefix={<Icon type={input.icon} />}
                 placeholder={input.placeholder}
@@ -72,6 +76,7 @@ function LoginForm({
               />
             ) : (
               <Input
+                className="form-control"
                 autoComplete="off"
                 prefix={<Icon type={input.icon} />}
                 placeholder={input.placeholder}
@@ -95,6 +100,7 @@ LoginForm.propTypes = {
   resetSubmitSuccess: PropTypes.func.isRequired,
   resetSubmitFailed: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
 };
 
 export default Form.create({ name: 'login_form' })(LoginForm);

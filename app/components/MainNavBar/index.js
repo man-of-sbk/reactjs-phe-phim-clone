@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 import NavLinks from 'containers/NavLinks/index';
 import NavbarHamburger from 'components/NavbarHamburger/index';
@@ -13,7 +13,6 @@ import Logo from 'components/Logo/index';
 import NavbarDrawer from 'components/NavbarDrawer/index';
 
 import Wrapper from './styledComponents/Wrapper';
-// import styled from 'styled-components';
 
 function MainNavbar() {
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -23,7 +22,7 @@ function MainNavbar() {
   };
 
   return (
-    <Wrapper className="clearfix">
+    <Wrapper>
       <div className="container h-100">
         <Logo />
         <NavLinks className="float-left" mode="horizontal" />

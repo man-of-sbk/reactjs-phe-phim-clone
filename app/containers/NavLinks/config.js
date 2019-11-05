@@ -2,7 +2,7 @@
 export const links = [
   {
     to: '/',
-    content: 'Phê Phim',
+    content: 'Trang chủ',
   },
   {
     to: '/club',

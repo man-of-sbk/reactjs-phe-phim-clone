@@ -15,7 +15,7 @@ import Wrapper from './styledComponents/Wrapper';
 
 function Logo() {
   return (
-    <Wrapper>
+    <Wrapper to="/">
       <img src={LogoImage} alt="logo" />
     </Wrapper>
   );

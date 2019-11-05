@@ -8,15 +8,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Login from 'images/logo.png';
-import Wrapper from './styledComponents/Wrapper';
+import Div from './styledComponents/Div';
 // import styled from 'styled-components';
 
 function FormContainer({ children }) {
   return (
-    <Wrapper>
+    <Div>
       <img className="logo" src={Login} alt="phe phim logo" />
       {children}
-    </Wrapper>
+    </Div>
   );
 }
 

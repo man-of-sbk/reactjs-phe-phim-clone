@@ -13,6 +13,9 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+
+import Div from './styledComponents/Div';
+
 import makeSelectNotFoundPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -22,12 +25,16 @@ export function NotFoundPage() {
   useInjectSaga({ key: 'notFoundPage', saga });
 
   return (
-    <>
+    <Div>
       <Helmet>
         <title>NotFoundPage</title>
         <meta name="description" content="Description of NotFoundPage" />
       </Helmet>
-    </>
+      <main>
+        <div className="status">404</div>
+        <div className="message">Page Not Found</div>
+      </main>
+    </Div>
   );
 }
 

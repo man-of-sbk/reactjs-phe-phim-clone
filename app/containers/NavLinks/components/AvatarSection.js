@@ -8,13 +8,15 @@ import Avatar from 'antd/lib/avatar';
 import Icon from 'antd/lib/icon';
 import Menu from 'antd/lib/menu';
 
+import { subStr } from 'utils/subStr';
+
 import AvatarImg from 'images/avatar.png';
 
-const AvatarSection = ({ onSignOut }) => {
+const AvatarSection = ({ onSignOut, userName }) => {
   const dropdown = (
     <Menu id="avatar-dropdown">
       <Menu.Item key="0">
-        <Link to="/">Trang cá nhân</Link>
+        <Link to="/profile">Trang cá nhân</Link>
       </Menu.Item>
       <Menu.Item key="1">
         <Link to="/" onClick={onSignOut}>
@@ -30,7 +32,8 @@ const AvatarSection = ({ onSignOut }) => {
       <span>
         <Avatar src={AvatarImg} />
         <span className="avatar-name">
-          HunqVux99 <Icon type="caret-down" />
+          {subStr(userName, 9)}
+          <Icon type="caret-down" />
         </span>
       </span>
     </Dropdown>
@@ -39,6 +42,7 @@ const AvatarSection = ({ onSignOut }) => {
 
 AvatarSection.propTypes = {
   onSignOut: Proptypes.func.isRequired,
+  userName: Proptypes.string,
 };
 
 export default AvatarSection;

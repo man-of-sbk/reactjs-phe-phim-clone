@@ -15,8 +15,8 @@ function Footer() {
   return (
     <Wrapper className="container">
       <Col xs={24} lg={12}>
-        <h4>Phê Phim</h4>
-        <p>2018 Thử nghiệm cộng đồng , chờ giấy phép MXH của Bộ TT & TT</p>
+        <h4>Suncinema</h4>
+        <div>2018 Thử nghiệm cộng đồng , chờ giấy phép MXH của Bộ TT & TT</div>
       </Col>
       <Col xs={24} lg={12}>
         <h4>Theo dõi chúng tôi</h4>

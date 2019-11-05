@@ -24,12 +24,11 @@ const style = buildStyles({
 });
 
 function LazyPercentageCircle({ value, className }) {
-  // const [isSeen, setIsSeen] = useState(false);
   const [targetValue, setTargetValue] = useState(0);
 
   useEffect(() => {
     setTargetValue(value);
-  }, []);
+  }, [value]);
 
   return (
     <Wrapper className={`progress-circle ${className}`}>

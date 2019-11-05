@@ -6,15 +6,18 @@ import { secondary } from 'cssVariable';
 
 const Wrapper = styled(Row)`
   color: ${secondary};
-  padding: 10px 0;
+  padding: 60px 0 10px 0;
 
   h4 {
     color: ${secondary};
   }
 
-  .social-link img {
-    width: 40px;
+  .social-link {
     margin-right: 20px;
+
+    img {
+      width: 40px;
+    }
   }
 `;
 

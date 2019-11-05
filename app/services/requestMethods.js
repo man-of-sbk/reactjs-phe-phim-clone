@@ -27,3 +27,41 @@ export const requestAuthorizeUser = () =>
   requests.get({
     url: '/user',
   });
+
+export const requestFetchSortedMoviesList = data =>
+  requests.get({
+    url: `/movies/?sort=${data.sort}&page=${data.page}`,
+  });
+
+export const requestMovieViaId = id =>
+  requests.get({
+    url: `/movies/${id}`,
+  });
+
+export const requestSearchMovieByName = name =>
+  requests.get({
+    url: `/search?search=${name}`,
+  });
+
+export const requestUpdateUser = data =>
+  requests.post({
+    url: `/user/update`,
+    data,
+  });
+
+export const requestUpdateUserAvatar = data =>
+  requests.post({
+    url: `/user/update`,
+    data,
+  });
+
+export const requestFetchMovieSeats = movieId =>
+  requests.get({
+    url: `/bookable_seat/${movieId}`,
+  });
+
+export const requestSubmitSeats = ({ movieId, seat }) =>
+  requests.post({
+    url: `/bookable_seat/${movieId}`,
+    data: { seat },
+  });

@@ -1,15 +1,18 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
 import Icon from 'antd/lib/icon';
-import { NavLink } from 'react-router-dom';
+import Input from 'antd/lib/input';
 
-import SearchInput from 'components/SearchInput/index';
+import { NavLink } from 'react-router-dom';
 
 function SearchBar() {
   return (
     <>
-      <SearchInput className="search-input" placeholder="Phim" />
-      <NavLink className="search-navlink" to="/">
+      <Input
+        className="search-input form-control border-radius-50"
+        placeholder="Phim"
+      />
+      <NavLink className="search-navlink" to="/movies">
         <Icon type="search" />
       </NavLink>
     </>

@@ -16,29 +16,29 @@ import { signOutAction } from 'containers/App/actions';
 
 import { NavLink } from 'react-router-dom';
 import Menu from 'antd/lib/menu';
-import Wrapper from './styledComponents/Wrapper';
-import SearchBar from './components/SearchBar';
+import StyledMenu from './styledComponents/StyledMenu';
+// import SearchBar from './components/SearchBar';
 import RightLinks from './components/RightLinks';
 
 import { links } from './config';
 
 export function NavLinks({ mode, app, dispatchSignOut }) {
   return (
-    <Wrapper className={mode === `horizontal` && `d-flex-ni`} mode={mode}>
+    <StyledMenu className={mode === `horizontal` && `d-flex-ni`} mode={mode}>
       {links.map((link, index) => (
         <Menu.Item key={index}>
           <NavLink to={link.to}>{link.content}</NavLink>
         </Menu.Item>
       ))}
 
-      <Menu.Item className="search-navlink-container">
+      {/* <Menu.Item className="search-navlink-container">
         <SearchBar />
-      </Menu.Item>
+      </Menu.Item> */}
 
       <Menu.Item className="right-links-container">
         <RightLinks user={app.user} onSignOut={dispatchSignOut} />
       </Menu.Item>
-    </Wrapper>
+    </StyledMenu>
   );
 }
 

@@ -3,6 +3,7 @@ export const dark = `#14181c`;
 
 export const darkGrey = `#456`;
 export const darkGrey2 = `#21282f`;
+export const darkGrey3 = `#242d35`;
 
 export const lightOnDark = `#191e23`;
 

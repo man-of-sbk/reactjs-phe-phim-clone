@@ -1,7 +1,9 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 
-const Wrapper = styled.a`
+import { Link } from 'react-router-dom';
+
+const Wrapper = styled(Link)`
   display: flex;
   align-items: center;
   float: left;

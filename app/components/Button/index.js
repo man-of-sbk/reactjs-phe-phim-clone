@@ -8,11 +8,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'antd/lib/icon';
 
-import StyledButton from './styledComponents/Button';
+import Wrapper from './styledComponents/Wrapper';
 
 function Button({ children, color, iconType, borderColor, bordered, ...rest }) {
   return (
-    <StyledButton
+    <Wrapper
       ghost
       {...rest}
       color={color}
@@ -21,7 +21,7 @@ function Button({ children, color, iconType, borderColor, bordered, ...rest }) {
     >
       {iconType !== undefined && <Icon type={iconType} />}
       {children}
-    </StyledButton>
+    </Wrapper>
   );
 }
 

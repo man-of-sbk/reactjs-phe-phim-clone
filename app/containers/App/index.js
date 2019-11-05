@@ -26,7 +26,10 @@ import GlobalStyle from 'global-styles';
 import GlobalThemeStyles from 'global-theme-styles';
 
 import LoadingPage from 'containers/LoadingPage/index';
-import Wrapper from './styledComponents/Wrapper';
+import MoviesPage from 'containers/MoviesPage/index';
+import ProfilePage from 'containers/ProfilePage/index';
+import MovieInfoPage from 'containers/MovieInfoPage/index';
+import Div from './styledComponents/Div';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -58,7 +61,7 @@ export function App({
 
   return (
     <>
-      <Wrapper>
+      <Div id="top-nav-bar">
         {isInPageWithFullLayout && (
           <Layout.Header>
             <MainNavbar user={app.user} onSignOut={dispatchSignOut} />
@@ -69,6 +72,9 @@ export function App({
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={AuthPage} />
             <Route path="/signup" component={AuthPage} />
+            <Route path="/movies" component={MoviesPage} />
+            <Route path="/profile" component={ProfilePage} />
+            <Route path="/movie/:id" component={MovieInfoPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </Layout.Content>
@@ -77,7 +83,7 @@ export function App({
             <Footer />
           </Layout.Footer>
         )}
-      </Wrapper>
+      </Div>
       <GlobalStyle />
       <GlobalThemeStyles />
     </>

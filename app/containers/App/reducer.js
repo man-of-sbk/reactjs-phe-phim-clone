@@ -15,6 +15,7 @@ export const initialState = {
   user: undefined,
   isAuthorizingUser: false,
   AuthorizeUserSuccess: false,
+  canGoToProfilePage: true,
 };
 
 /* eslint-disable default-case, no-param-reassign */
@@ -50,12 +51,14 @@ const appReducer = (state = initialState, action) =>
       case actionTypes.AUTHORIZE_USER_SUCCESS_ACTION:
         draft.user = action.payloads;
         draft.AuthorizeUserSuccess = true;
+        draft.canGoToProfilePage = true;
         draft.isAuthorizingUser = false;
         break;
 
       case actionTypes.AUTHORIZE_USER_FAILED_ACTION:
         draft.user = undefined;
         draft.AuthorizeUserSuccess = false;
+        draft.canGoToProfilePage = false;
         draft.isAuthorizingUser = false;
         break;
 

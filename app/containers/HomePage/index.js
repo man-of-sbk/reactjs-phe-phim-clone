@@ -25,9 +25,6 @@ export function HomePage({ app }) {
   useInjectReducer({ key: 'homePage', reducer });
   useInjectSaga({ key: 'homePage', saga });
 
-  // console.log(app.hotMovies);
-  // console.log(app.latestMovies);
-
   return (
     <>
       <Helmet>
@@ -35,8 +32,7 @@ export function HomePage({ app }) {
         <meta name="description" content="Description of HomePage" />
       </Helmet>
       <div className="container">
-        <LgMovieList title="Đang Hót" movies={app.hotMovies} />
-        {/* <LgMovieList title="Sắp Chiếu" movies={app.latestMovies} /> */}
+        <LgMovieList title="Đang Hot" movies={app.hotMovies} />
         <SmMovieList title="Sắp Chiếu" movies={app.latestMovies} />
       </div>
     </>

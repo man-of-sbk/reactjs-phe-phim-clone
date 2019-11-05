@@ -8,8 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 
-import LazyPercentageCircle from 'components/LazyPercentageCircle/index';
-import { subStr } from 'utils/subStr';
+import MovieItem from 'components/MovieItem/index';
+
 import { slideSettings } from './config';
 
 import Wrapper from './styledComponents/Wrapper';
@@ -24,15 +24,7 @@ function LgMovieList({ movies, title }) {
         <Slider {...slideSettings}>
           {movies.map(movie => (
             <div className="list-item-container" key={movie.id}>
-              <div className="movie-item">
-                <LazyPercentageCircle value={movie.vote_average * 10} />
-                <img
-                  className="movie-banner"
-                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                  alt={movie.title}
-                />
-                <h3>{subStr(movie.title, 6)}</h3>
-              </div>
+              <MovieItem movie={movie} />
             </div>
           ))}
         </Slider>

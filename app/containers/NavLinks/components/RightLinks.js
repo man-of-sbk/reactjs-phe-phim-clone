@@ -4,8 +4,6 @@ import Proptypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { primary, darkGrey, secondary } from 'cssVariable';
 
-// import { makeSelectApp as app } from 'containers/App/selectors';
-
 import Button from 'components/Button/index';
 import AvatarSection from './AvatarSection';
 
@@ -23,7 +21,7 @@ function RightLinks({ user, onSignOut }) {
       </Button>
 
       {user ? (
-        <AvatarSection onSignOut={onSignOut} />
+        <AvatarSection userName={user.name} onSignOut={onSignOut} />
       ) : (
         <Button borderColor={darkGrey} color={secondary} bordered>
           <NavLink to="/login">Đăng nhập</NavLink>
