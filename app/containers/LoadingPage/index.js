@@ -11,7 +11,7 @@ import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 
 import LoadingIcon from 'images/loading-icon.gif';
-import Div from './styledComponents/Div';
+import Wrapper from './styledComponents/Wrapper';
 
 export function LoadingPage() {
   return (
@@ -20,9 +20,9 @@ export function LoadingPage() {
         <title>LoadingPage</title>
         <meta name="description" content="Description of LoadingPage" />
       </Helmet>
-      <Div>
+      <Wrapper>
         <img src={LoadingIcon} alt="logo" />
-      </Div>
+      </Wrapper>
     </>
   );
 }

@@ -29,7 +29,7 @@ import LoadingPage from 'containers/LoadingPage/index';
 import MoviesPage from 'containers/MoviesPage/index';
 import ProfilePage from 'containers/ProfilePage/index';
 import MovieInfoPage from 'containers/MovieInfoPage/index';
-import Div from './styledComponents/Div';
+import Wrapper from './styledComponents/Wrapper';
 
 import reducer from './reducer';
 import saga from './saga';
@@ -61,7 +61,7 @@ export function App({
 
   return (
     <>
-      <Div id="top-nav-bar">
+      <Wrapper id="top-nav-bar">
         {isInPageWithFullLayout && (
           <Layout.Header>
             <MainNavbar user={app.user} onSignOut={dispatchSignOut} />
@@ -83,7 +83,7 @@ export function App({
             <Footer />
           </Layout.Footer>
         )}
-      </Div>
+      </Wrapper>
       <GlobalStyle />
       <GlobalThemeStyles />
     </>

@@ -26,7 +26,7 @@ import Pagination from 'antd/lib/pagination';
 // import ScrollBot from 'components/ScrollBot/index';
 import MovieItem from 'components/MovieItem/index';
 import MovieListContainer from 'components/MovieListContainer/index';
-import Div from './styledComponents/Div';
+import Wrapper from './styledComponents/Wrapper';
 import FilterSection from './components/FilterSection';
 
 import makeSelectMoviesPage from './selectors';
@@ -76,7 +76,7 @@ export function MoviesPage({
   return (
     <Spin spinning={moviesPage.isFetchingMovies}>
       {/* <ScrollBot rootComponentId="app" onScrollBot={loadMoreMovie} /> */}
-      <Div>
+      <Wrapper>
         <Helmet>
           <title>MoviesPage</title>
           <meta name="description" content="Description of MoviesPage" />
@@ -106,7 +106,7 @@ export function MoviesPage({
             )}
           </MovieListContainer>
         </div>
-      </Div>
+      </Wrapper>
     </Spin>
   );
 }

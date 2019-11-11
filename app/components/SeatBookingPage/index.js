@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
 /**
@@ -6,8 +7,9 @@
  *
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import produce from 'immer';
 
 import message from 'antd/lib/message';
 
@@ -17,6 +19,13 @@ import Header from './components/Header';
 import Seat from './components/Seat';
 import Wrapper from './styledComponents/Wrapper';
 
+import { singleSeat } from './utils/singleSeatHelpers';
+import {
+  renderSeatClass,
+  initseatsStatus,
+  seatIdGenerator,
+} from './utils/seatsHelpers';
+
 function SeatBookingPage({
   title,
   seats,
@@ -25,266 +34,57 @@ function SeatBookingPage({
   userId,
   ...rest
 }) {
+  const [seatsClickStatus, setseatsClickStatus] = useState(false);
+  const [bookedSeatsMap, setBookedSeatsMap] = useState(false);
   const [chosenSeats, setChosenSeats] = useState([]);
-  const [singleSeat, setSingleSeat] = useState({ x: undefined, y: undefined });
-  // console.log(chosenSeats);
 
-  const addNewSeat = newSeat => {
-    const newChosenSeats = [...chosenSeats];
-
-    newChosenSeats.push(newSeat);
-    setChosenSeats(newChosenSeats);
-  };
-
-  const singleSeatInTheLeft = ({ seatRow, posX, posY, isClicked }) => {
-    const leftSeatNextToTheOneNextToThisSeatIndex = posX - 2;
-
-    const leftSeatNextToTheOneNextToThisSeat =
-      seatRow[leftSeatNextToTheOneNextToThisSeatIndex];
-
-    const isLeftSeatNextToTheOneNextToThisSeatChosen = chosenSeats.find(
-      seat =>
-        seat.x === leftSeatNextToTheOneNextToThisSeatIndex && seat.y === posY,
+  useEffect(() => {
+    initseatsStatus(seats, newseatsClickStatus =>
+      setseatsClickStatus(newseatsClickStatus),
     );
 
-    if (
-      isClicked &&
-      (isLeftSeatNextToTheOneNextToThisSeatChosen !== undefined ||
-        leftSeatNextToTheOneNextToThisSeat === userId ||
-        leftSeatNextToTheOneNextToThisSeatIndex === -1)
-    ) {
-      const leftSeatNextToThisSeatIndex = posX - 1;
-      const leftSeatNextToThisSeat = seatRow[leftSeatNextToThisSeatIndex];
-      const isLeftSeatNextToThisSeatChosen = chosenSeats.find(
-        seat => seat.x === leftSeatNextToThisSeatIndex && seat.y === posY,
-      );
+    setBookedSeatsMap(seats);
+  }, [seats]);
 
-      if (leftSeatNextToThisSeat !== null) {
-        console.log('ok left 1');
-        return false;
-      }
+  const handleOnClick = (posX, posY) => {
+    const seatId = seatIdGenerator(posY, posX);
+    const seatRow = bookedSeatsMap[posY];
+    const currentClickState = seatsClickStatus[seatId];
 
-      if (
-        isLeftSeatNextToThisSeatChosen &&
-        isLeftSeatNextToThisSeatChosen.value === true
-      ) {
-        console.log('ok left 2');
-        return false;
-      }
-      console.log('not ok left ');
-      return true;
-    }
-
-    console.log('ok left 3');
-    return false;
-  };
-
-  const singleSeatInTheRight = ({ seatRow, posX, posY, isClicked }) => {
-    const rightSeatNextToTheOneNextToThisSeatIndex = posX + 2;
-
-    const rightSeatNextToTheOneNextToThisSeat =
-      seatRow[rightSeatNextToTheOneNextToThisSeatIndex];
-
-    const isRightSeatNextToTheOneNextToThisSeatChosen = chosenSeats.find(
-      seat =>
-        seat.x === rightSeatNextToTheOneNextToThisSeatIndex && seat.y === posY,
-    );
-
-    if (
-      isClicked &&
-      rightSeatNextToTheOneNextToThisSeat !== undefined &&
-      (isRightSeatNextToTheOneNextToThisSeatChosen !== undefined ||
-        rightSeatNextToTheOneNextToThisSeat === userId ||
-        rightSeatNextToTheOneNextToThisSeatIndex === seatRow.length)
-    ) {
-      const rightSeatNextToThisSeatIndex = posX + 1;
-      const rightSeatNextToThisSeat = seatRow[rightSeatNextToThisSeatIndex];
-      const isRightSeatNextToThisSeatChosen = chosenSeats.find(
-        seat => seat.x === rightSeatNextToThisSeatIndex && seat.y === posY,
-      );
-
-      if (rightSeatNextToThisSeat !== null) {
-        console.log('ok right 1');
-        return false;
-      }
-
-      if (
-        isRightSeatNextToThisSeatChosen &&
-        isRightSeatNextToThisSeatChosen.value === true
-      ) {
-        console.log('ok right 2');
-        return false;
-      }
-
-      console.log(
-        'not ok right',
-        rightSeatNextToTheOneNextToThisSeatIndex === seatRow.length,
-      );
-      return true;
-    }
-
-    console.log('ok right 3');
-    return false;
-  };
-
-  const singleSeatInMiddle = ({ posX, posY, isClicked }) => {
-    // const leftSeatNextToThisOne = seats[posX - 1];
-    // const rightSeatNextToThisOne = seats[posX + 1];
-
-    const isLeftSeatNextToThisOneChosen = chosenSeats.find(
-      seat => seat.x === posX - 1 && seat.y === posY,
-    );
-
-    const isRightSeatNextToThisOneChosen = chosenSeats.find(
-      seat => seat.x === posX + 1 && seat.y === posY,
-    );
-
-    if (
-      !isClicked &&
-      isLeftSeatNextToThisOneChosen !== undefined &&
-      isRightSeatNextToThisOneChosen !== undefined
-    ) {
-      return true;
-    }
-
-    return false;
-  };
-
-  const handleSingleSeats = ({ posX, posY, isClicked }) => {
-    (() => {
-      // const seatPrevToNewSeat = chosenSeats.find(
-      //   seat => seat.y === posY && seat.x === posX - 1,
-      // );
-      // const leftSeatSeparatedToNewSeatByTwoOnes = chosenSeats.find(
-      //   seat => seat.y === posY && seat.x === posX - 2,
-      // );
-      // const seatNextToNewSeat = chosenSeats.find(
-      //   seat => seat.y === posY && seat.x === posX + 1,
-      // );
-      // const rightSeatSeparatedToNewSeatByTwoOnes = chosenSeats.find(
-      //   seat => seat.y === posY && seat.x === posX + 2,
-      // );
-      // if ((!isClicked || isClicked) && seatPrevToNewSeat && seatNextToNewSeat) {
-      //   return {
-      //     result: false,
-      //     status: 0, // *** => single seat in middle
-      //   };
-      // }
-      // if (
-      //   isClicked &&
-      //   leftSeatSeparatedToNewSeatByTwoOnes &&
-      //   !seatPrevToNewSeat
-      // ) {
-      //   return {
-      //     result: false,
-      //     status: 1, // *** => single seat not in middle
-      //   };
-      // }
-      // if (
-      //   isClicked &&
-      //   rightSeatSeparatedToNewSeatByTwoOnes &&
-      //   !seatNextToNewSeat
-      // ) {
-      //   return {
-      //     result: false,
-      //     status: 1, // *** => single seat not in middle
-      //   };
-      // }
-      // return {
-      //   result: true,
-      //   status: 1, // *** => seat not in middle
-      // };
-    })();
-
-    const associatedSeatRow = seats[posY];
-    const thereIsAsingleSeatInTheLeft = singleSeatInTheLeft({
-      seatRow: associatedSeatRow,
-      posX,
-      posY,
-      isClicked,
-    });
-    const thereIsAsingleSeatInTheRight = singleSeatInTheRight({
-      seatRow: associatedSeatRow,
-      posX,
-      posY,
-      isClicked,
-    });
-    const thereIsAsingleSeatInMiddle = singleSeatInMiddle({
-      posX,
-      posY,
-      isClicked,
+    const hasSingleSeat = singleSeat({
+      seatXposition: posX,
+      currentClickState,
+      seatRow,
+      userId,
     });
 
-    console.log(thereIsAsingleSeatInTheLeft);
-    console.log(thereIsAsingleSeatInTheRight);
+    if (!hasSingleSeat) return message.error('bạn không được để ghế trống !');
 
-    if (thereIsAsingleSeatInTheLeft || thereIsAsingleSeatInTheRight) {
-      return {
-        result: false,
-        status: 1, // *** => single seat not in middle
-      };
-    }
-
-    // if (thereIsAsingleSeatInMiddle) {
-    //   return {
-    //     result: false,
-    //     status: 0, // *** => single seat in middle
-    //   };
-    // }
-
-    // if() {
-
-    // }
-
-    return { result: true };
-  };
-
-  const removeMovieChosen = ({ posX, posY, isClicked }) => {
-    const thisSeatInChosenSeatsList = chosenSeats.find(
-      seat => seat.x === posX && seat.y === posY,
+    setseatsClickStatus(
+      produce(seatsClickStatus, draft => {
+        draft[seatId] = !draft[seatId];
+      }),
     );
 
-    const noSingleSeat = handleSingleSeats({ posX, posY, isClicked });
+    setBookedSeatsMap(
+      produce(bookedSeatsMap, draft => {
+        draft[posY][posX] = !currentClickState ? userId : null;
+      }),
+    );
 
-    if (!noSingleSeat.result) {
-      setSingleSeat({
-        x: posX,
-        y: posY,
-        status: noSingleSeat.status,
-      });
+    setChosenSeats(
+      produce(chosenSeats, draft => {
+        if (!currentClickState) {
+          draft.push({ x: posX, y: posY, value: true });
+          return;
+        }
+        const thisSeat = draft.find(seat => seat.x === posX && seat.y === posY);
+        const indexOfThisSeat = draft.indexOf(thisSeat);
 
-      return message.error(
-        `Bạn đã chọn ghế trống, vui lòng chọn ghế bên cạnh !`,
-      );
-    }
-
-    setSingleSeat({ x: undefined, y: undefined });
-
-    if (thisSeatInChosenSeatsList) {
-      const newChosenSeats = [...chosenSeats];
-      const indexOfThisSeat = newChosenSeats.indexOf(thisSeatInChosenSeatsList);
-
-      newChosenSeats.splice(indexOfThisSeat, 1);
-      return setChosenSeats(newChosenSeats);
-    }
-
-    const newSeat = { x: posX, y: posY, value: isClicked };
-    addNewSeat(newSeat);
+        draft.splice(indexOfThisSeat, 1);
+      }),
+    );
   };
-
-  const handleOnChoosingSeat = ({ posX, posY, isClicked }) => {
-    removeMovieChosen({ posX, posY, isClicked });
-  };
-
-  const renderClassForBtn = seat => {
-    if (seat === userId) {
-      return `seat my-booked-seat`;
-    }
-
-    return `seat ${seat !== null ? `booked-seat` : `empty-seat`}`;
-  };
-
-  // console.log('index page', seats);
 
   const handleOnOk = () => onOk(chosenSeats);
 
@@ -302,21 +102,24 @@ function SeatBookingPage({
           seats.map((seatRow, seatRowIndex) => (
             <div className="seat-row" key={seatRowIndex}>
               {seatRow.map((seat, seatIndex) => {
+                const seatId = seatIdGenerator(seatRowIndex, seatIndex);
                 return (
-                  <Seat
+                  <button
                     key={seatIndex}
-                    noActiveStatus={singleSeat.status}
-                    noActive={
-                      singleSeat.x === seatIndex &&
-                      singleSeat.y === seatRowIndex
+                    className={renderSeatClass(
+                      seat,
+                      userId,
+                      seatsClickStatus[seatId],
+                    )}
+                    type="button"
+                    onClick={
+                      seat === null
+                        ? () => handleOnClick(seatIndex, seatRowIndex)
+                        : () => {}
                     }
-                    seatName={`${seatRowIndex + 1}${seatIndex + 1}`}
-                    className={renderClassForBtn(seat)}
-                    isBooked={seat !== null}
-                    posX={seatIndex}
-                    posY={seatRowIndex}
-                    onClick={seat === null ? handleOnChoosingSeat : () => {}}
-                  />
+                  >
+                    <span>{`${seatRowIndex + 1}${seatIndex + 1}`}</span>
+                  </button>
                 );
               })}
             </div>

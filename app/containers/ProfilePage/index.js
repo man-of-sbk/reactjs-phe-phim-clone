@@ -64,7 +64,7 @@ export function ProfilePage({
   useInjectSaga({ key: 'profilePage', saga });
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const { user, canGoToProfilePage } = app;
+  const { user, ableToAccessPageNeedingUser } = app;
 
   useEffect(() => {
     if (profilePage.updateUserAvatarFailed) {
@@ -79,12 +79,12 @@ export function ProfilePage({
   }, [profilePage.updateUserAvatarFailed, profilePage.updateUserSuccess]);
 
   useEffect(() => {
-    if (!canGoToProfilePage)
+    if (!ableToAccessPageNeedingUser)
       history.replace({
         pathname: '/login',
         state: { requestFromProfile: true },
       });
-  }, [canGoToProfilePage]);
+  }, [ableToAccessPageNeedingUser]);
 
   const handleCloseDrawer = () => {
     setOpenDrawer(false);

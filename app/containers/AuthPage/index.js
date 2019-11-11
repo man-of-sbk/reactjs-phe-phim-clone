@@ -20,7 +20,7 @@ import Spin from 'antd/lib/spin';
 
 import LoginForm from './components/LoginForm';
 import SignUpForm from './components/SignUpForm';
-import Div from './styledComponents/Div';
+import Wrapper from './styledComponents/Wrapper';
 import FormContainer from './components/FormContainer/index';
 
 import reducer from './reducer';
@@ -45,7 +45,7 @@ export function AuthPage({
 
   return (
     <Spin spinning={authPage.isSubmitting}>
-      <Div>
+      <Wrapper>
         <FormContainer>
           <Switch>
             <Route
@@ -72,7 +72,7 @@ export function AuthPage({
             />
           </Switch>
         </FormContainer>
-      </Div>
+      </Wrapper>
     </Spin>
   );
 }

@@ -1,9 +1,8 @@
-/* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { dark, primary } from 'cssVariable';
+import { primary } from 'cssVariable';
 // import * as breakpoints from 'breakpoints';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -22,10 +21,9 @@ const Div = styled.div`
 
     .message {
       color: white;
-      /* font-weight: bold; */
       font-size: 25px;
     }
   }
 `;
 
-export default Div;
+export default Wrapper;

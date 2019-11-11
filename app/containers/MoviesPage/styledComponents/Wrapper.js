@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { secondary, darkGrey2 } from 'cssVariable';
 import * as breakpoints from 'breakpoints';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   .movie-item {
     .progress-circle {
       top: 20px;
@@ -62,4 +62,4 @@ const Div = styled.div`
   }
 `;
 
-export default Div;
+export default Wrapper;

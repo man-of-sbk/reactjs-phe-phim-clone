@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { dark, lightOnDark } from 'cssVariable';
 // import * as breakpoints from 'breakpoints';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   .ant-layout-header {
     padding: 0;
   }
@@ -24,4 +24,4 @@ const Div = styled.div`
   }
 `;
 
-export default Div;
+export default Wrapper;

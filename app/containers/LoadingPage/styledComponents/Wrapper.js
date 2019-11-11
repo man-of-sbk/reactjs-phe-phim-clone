@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 // import { dark } from 'cssVariable';
 
-const Div = styled.div`
+const Wrapper = styled.div`
   background: #191f26;
   min-height: 100vh;
   display: flex;
@@ -16,4 +16,4 @@ const Div = styled.div`
   }
 `;
 
-export default Div;
+export default Wrapper;

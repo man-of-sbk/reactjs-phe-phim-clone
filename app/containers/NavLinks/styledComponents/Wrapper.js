@@ -4,7 +4,7 @@ import Menu from 'antd/lib/menu';
 import { secondary, primary } from 'cssVariable';
 import * as breakpoints from 'breakpoints';
 
-const StyledMenu = styled(Menu)`
+const Wrapper = styled(Menu)`
   align-items: center;
   border: 0;
   .search-navlink {
@@ -68,4 +68,4 @@ const StyledMenu = styled(Menu)`
   }
 `;
 
-export default StyledMenu;
+export default Wrapper;
