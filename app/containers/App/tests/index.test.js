@@ -1,38 +1,18 @@
-/**
- *
- * Tests for App
- *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
- */
+import { weekdaysShort } from 'moment';
+import * as math from '../test-jest/math';
+import * as app from '../test-jest/app';
 
-import React from 'react';
-import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+// Set all exported functions of the math.js file to mock versions of themselves automatically
+// jest.mock('../test-jest/math');
 
-import { App } from '../index';
+const addMock = jest.fn((a, b) => a + b);
 
-describe('<App />', () => {
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
-    const dispatch = jest.fn();
-    render(<App dispatch={dispatch} />);
-    expect(spy).not.toHaveBeenCalled();
-  });
-
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
-  });
-
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<App />);
-    expect(firstChild).toMatchSnapshot();
-  });
+test('calls math.add', () => {
+  console.log(addMock);
+  // expect(math.add.mock.results[0].value).toBe(3);
 });
+
+// test('calls math.subtract', () => {
+//   console.log(math.subtract(1, 2));
+//   // expect(math.add.mock.results[0].value).toBe(3);
+// });
