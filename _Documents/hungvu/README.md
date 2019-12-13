@@ -10,27 +10,27 @@ $ npm install --save-dev jest
 ```
 ## 2. Basic working flow
 
- **1**. Write the function needing testing
+ **1**. prepare a function needing testing
 ```javascript
 export const sum = (a, b) => a + b;
 ```
 
-**2**. Create a file with `.test.js` extension (e.g. `index.test.js`) in order to test the above function. Then, import the function needing testing. Finally, add `jest` testing methods. (no need to import those methods since they'll be executed via `jest's cli`).
+**2**. Create a file with `.test.js` extension (e.g. `index.test.js`). Then, import the function which need testing. Finally, create test cases based on functions `jest` provides. (no need to import these functions since they will be executed via `jest cli`).
 ```javascript
 import { sum } from 'index.js';
 
 /*
-	*** the first arg of the following 'test' function is an error message will being logged
-	when the 'sum' function doesn't perform correctly as what we expect
+	*** define a test case
 */
-test('1 + 2 must be 3', () => {
+test('test case description', () => {
 
 	// *** expect the 'sum' function to return 3 when receiving two arguments, 1 & 2
 	expect(sum(1, 2)).toBe(3);
 });
 ```
 
- **3**. Add an `npm` command executing `jest` cli which will end up identifying as well as executing the `jest` methods above automatically on being performed to the `package.json` file.
+ **3**. Create a command based on `jest cli` to run test cases.
+
  ```javascript
 ...
 "scripts": {
@@ -39,7 +39,7 @@ test('1 + 2 must be 3', () => {
 },
 ...
 ```
- **4**.  Execute the newly-created command above so as to to perform the test cases we defined above in the file with `.test.js` extension.
+ **4**.  Execute the newly-created command.
  
  The command will scan through our project, find files with `.test.js` extension and execute them
 ```
@@ -47,12 +47,13 @@ test('1 + 2 must be 3', () => {
 ```
 
 **Result**:
-1. a success result:
+
+**1**. a success result:
 ```
 PASS app/containers/App/tests/index.test.js
 ```
 
-2. a fail result:
+**2**. a fail result:
 ```
 FAIL  app/containers/App/tests/index.test.js
  ● 1 + 2 = 3 !!!
@@ -72,8 +73,22 @@ FAIL  app/containers/App/tests/index.test.js
      at Object.toBe (app/containers/App/tests/index.test.js:4:23)
 ```
 
+## 3. `it` vs `test`
+
+`it` is just an alias of `test` which provides better & more readable desciptions for test cases in certain circumstances.
+
+```js
+import { sum } from  '../test-jest/sum';
+
+it('should returns 3 when receiving 1 & 2', () => {
+	expect(sum(1, 2)).toBe(3);
+});
+```
+
+
+
 ## 3. `Object.is` vs ===
-`Object.is` is used to compare 2 values. It is pretty similar to `===`. Nonetheless, with it will treat some specific values distinctly from `===`. 
+`Object.is` is used to compare 2 values. It is pretty similar to `===`. Nonetheless, it will treat some specific values diffirently from `===`. 
 
 **Examples**:
 
@@ -98,7 +113,7 @@ console.log(Object.is({}, {})); // *** false
 ```
 
 ## 4. Matchers
-Matchers are methods of `expect` function, which let us test given values.
+Matchers are methods of `expect` function, which let us define expected output of given values/functions
 
 Different matchers as well as detail information about them can be found at [this](https://jestjs.io/docs/en/expect).
 
@@ -116,7 +131,7 @@ test('object assignment', () => {
 ```
 
 ### Notice: `toBe` vs  `toEqual`:
-`toEqual` performs a **deep** comparison while `toBe` is similar to `===` with special treatments over a certain number of cases.
+`toEqual` performs a **deep** comparison while `toBe` is like a `===` with special treatments over a certain number of values.
 
 **Examples**:
 ```js
@@ -144,9 +159,11 @@ test('test', () => {
 
 ## 5. Testing asynchronous functions
 
-### 1. Dealing with Callbacks
+### 1. Callback functions
 
-`Jest` tests values synchronously. Therefore, when needing to test asynchronous functions, we have to tell `jest` when the asynchronous functions ends in order to make `jest` work as what it is expected to.
+`Jest` tests values synchronously. Therefore, when needing to test asynchronous functions, we have to tell `jest` when the asynchronous functions ends.
+
+The test case below should return FAIL since the `callback` function receives no argument. However, it returns PASS because  `jest` switch to other test cases right after the `setTimeout` statement is called and completely ignore the `callback` function of the `setTimeout`.
 
 
 ```js
@@ -182,75 +199,33 @@ test('the data callback returns should be "aaa"', done => {
 /*
 	*** RESULT:
 		FAIL  app/containers/App/tests/testAsync.test.js
-			● Console
-			    console.error node_modules/jsdom/lib/jsdom/virtual-console.js:29
-			    ...
-		    
-			● the data callback returns should be "aaa"
-
-			    expect(received).toBe(expected) // Object.is equality
-
-			    Expected: "aaa"
-			    Received: undefined
-
-			    Difference:
-
-			      Comparing two different types of values. Expected string but received undefined.
-
-			      1 | test('the data callback returns should be "aaa"', done => {
-			      2 |   const callback = data => {
-			    > 3 |     expect(data).toBe('aaa');
-			        |                  ^
-			      4 |     done();
-			      5 |   };
-			      6 | 
-
-			      at toBe (app/containers/App/tests/testAsync.test.js:3:18)
-			      at Timeout.callback [as _onTimeout] (node_modules/jsdom/lib/jsdom/browser/Window.js:678:19)
 */
 ```
 	
-### 2. Dealing with Promise
-On dealing with testing a Promise, we could just simply make use of the argument of the callback function of the `test` function like above.
+### 2. Promise
+Another approach we could implement is just simply returning a `timer` function. or a `Promise`
 
+**Timer function**
 ```js
-test('the data callback returns should be "aaa"', done  => {
-	const  promise  =  new  Promise(res  => {
-		res();
-	});
-
-	promise.then(result  => {
-		expect(result).toEqual('aaa');
-		done();
-	});
+test('the data callback returns should be "aaa"', () => {
+	const  callback  = (data) => {
+		expect(data).toBe('aaa');
+	}
+	
+	setTimeout(callback, 2000);
 });
 
 /*
 	*** RESULT:
 		 FAIL  app/containers/App/tests/testAsync.test.js
-		  ● the data callback returns should be "aaa"
-
-		    expect(received).toEqual(expected)
-
-		    Expected: "aaa"
-		    Received: undefined
-
-		      22 | 
-		      23 |   promise.then(result => {
-		    > 24 |     expect(result).toEqual('aaa');
-		         |                    ^
-		      25 |     done();
-		      26 |   });
-		      27 | });
-
-		      at toEqual (app/containers/App/tests/testAsync.test.js:24:20)
 */
 ```
 
-Or just return the Promise we want to test.
+
+**Promise**
 ```js
 test('the data callback returns should be "aaa"', () => {
-	const  promise = new  Promise(res => {
+	const promise = new Promise(res => {
 		res();
 	});
 
@@ -262,22 +237,6 @@ test('the data callback returns should be "aaa"', () => {
 /*
 	*** RESULT:
 		 FAIL  app/containers/App/tests/testAsync.test.js
-		  ● the data callback returns should be "aaa"
-
-		    expect(received).toEqual(expected)
-
-		    Expected: "aaa"
-		    Received: undefined
-
-		      22 | 
-		      23 |   promise.then(result => {
-		    > 24 |     expect(result).toEqual('aaa');
-		         |                    ^
-		      25 |     done();
-		      26 |   });
-		      27 | });
-
-		      at toEqual (app/containers/App/tests/testAsync.test.js:24:20)
 */
 ```
 
@@ -300,20 +259,24 @@ test('the data callback returns should be "aaa"', async () => {
 ```
 
 ## 6. Setup and Teardown
-At times, we might need to do something before or after each test runs. `jest` provides us helpers to handle this kind of situation.
+At times, we might need to do something before or after each test case runs. `jest` provides us helpers to handle this kind of situation.
 
-### 1. Repeating functions for each test
-To run a function repeatedly after or before a test runs, we could leverage: `beforeEach` & `afterEach` functions. These 2 functions only have interaction with tests inside the file where they are defined.
+### 1. Run a function after or before each test case
+To run a function after or before a test case runs, we could utilize: `beforeEach` & `afterEach` functions. `beforeEach` & `afterEach` only have effects inside the file where they are defined.
 
 **Examples**:
-1. Create a file named `index.js`:
+
+**1**. Here in a `index.js` file, i defined 2 functions, `preTesting` running before a test case runs and `postTesting` running after a test case runs:
 ```js
 export  const  preTesting  = () =>  console.log('start testing');
 
 export  const  postTesting  = () =>  console.log('testing done');
 ```
 
-2. Create a test file named `index.test.js` & start testing: 
+**2**. Then i have a `index.test.js` file:
+
+When this file is tested, the `preTesting` function will run before both `testing 1` & `testing 2` test cases. The same is applied to the `postTesting` function.
+ 
 ```js
 import { preTesting, postTesting, get } from  '../test-jest/demoSetUpNtearDown';
 
@@ -346,9 +309,12 @@ test('testing 2', () => {
 ```
 
 ### 2. Run a function once after or before all tests run
-`jest` provides `beforeAll` & `afterAll` functions to handle this situation. These 2 functions only have interaction with tests inside the file where they are defined.
+`jest` provides `beforeAll` & `afterAll` which helps us executing 2 functions, one runs before all test cases run, the second runs after all test cases run. `beforeAll` & `afterAll` only have effects on the file where they are defined
 
-1. add additional functions to `index.js`
+**1**. Here i added a number of new functions to `index.js`
+
+Now, the `index.js` file is in charge of giving us the number of test cases which are tested
+
 ```js
 let numberOfTest = 0;
 
@@ -369,7 +335,7 @@ export const set = val => {
 };
 ```
 
-2. `index.test.js`
+**2**. `index.test.js`
 ```js
 import {
 	preTesting,
@@ -412,9 +378,9 @@ test('testing 2', () => {
 ```
 
 ### 3. Scoping
-By default, all above functions provided by `jest`  are implemented to every test in a file. However, we can also gather tests together use `describe` function.
+All `jest` functions above have effects only on the file where they are defined. We can also gather them together so as to limit their effects on only a certain number of test cases using `describe` function.
 
-Notice that the describe defined before other ones will run before others. Another thing needed remembering is that when `jest` scout a file, it will run all `descibe` functions of that file before **all** `before`/`after` functions are executed.
+Notice that the describe defined before other ones will run before others. Another thing you need to remember is that when `jest` scout a file, it will run all `descibe` functions of that file before **all** `before`/`after` functions are executed.
 
 **Examples**:
 ```js
@@ -460,8 +426,13 @@ describe('testing 2 scope', () => {
 */
 ```
 
-### 4. Only test one test in a file
-We can use `test.only` method in order to run only one test & ignore all other ones.
+### 4. Other useful methods
+
+**1**. **.only** & **.skip**
+
+We can use `.only`, `.skip` methods so as to run only one test case & ignore all other ones or skip testing specific test cases.
+
+Both `.only`, `.skip` can be implemented with both `test` / `it` and `describe` as well.
 
 ```js
 test('this is ignore', () => {
@@ -473,10 +444,67 @@ test.only('only this is tested', () => {
 });
 ```
 
-## 7. Mock function (function giả định)
-Mocking a function is replacing functions we don't control with mock functions over which we have full control.
+**2**. **.each**
 
-We could use `jest.fn()` to create a mock function.
+If we want to test something with a set of data, we could utilize `.each` method which could be implemented to `describe`, `test`, `it`, `it.skip`, `it.only`, e.g.
+
+`.each` return a higher-order function which receives:
+
+**an `array` of `arrays`.**
+
+The length of the `first array` indicates how many time a test case will run.
+
+The `arrays` the `first array` **contains** keeps arguments a test case receives on each of it's loop time.
+
+**Example**: 
+```js
+[
+	[1, 1, 2],
+	[1, 2, 3],
+	[1, 3, 4]
+]
+```
+
+After the higher-order function is executed, it returns a test case with small changes on each of it's arguments:
+
+**1**. The first argument, the description of the test case is now parsed by `jest` when it is logged. Basically, if the string contains one of following characters:
+
+`%p` - **Pretty format**
+`%s` - **String**
+`%d` - **Number**
+`%i` - **Integer**
+`%f` - **Floating point value**
+`%j` - **JSON**
+`%o` - **Object**
+`%#` - **Index of the current loop time of a test case**
+
+The characters will be parsed and they will return value of arguments of a test case on each loop according to the arguments' index and the characters' possition.
+
+**Example**:
+
+```js
+test.each([
+	[1, 1, 2],
+	[1, 2, 3],
+	[1, 3, 4],
+])
+('loop %#, expect %i + %i to be %i', (a, b, expectedVal) => {
+	expect(a + b).toBe(expectedVal);
+});
+```
+
+
+## 7. Mock function
+Mock function are special functions allowing us to track how a particular function is called by external code.
+
+By using mock functions, we can know the following:
+
+ - How many times is a function called.
+ - Argument values of a function on each call.
+- `this`  value of a function on each call.
+- The value a function returns.
+
+To create a mock function, use  `jest.fn()`
 ```js
 test("be expected to returns undefined", () => {
 	const mockFn = jest.fn();
@@ -530,7 +558,7 @@ test('mock function test', () => {
 });
 ```
 #### 2. `.mock.results`
-Contains information about a mock function's returned value in each call.
+Contains information about the value a mock function returns in each call.
 ```js
 test('mock function test', () => {
 	const mockFn = jest.fn(val => val);
@@ -544,7 +572,7 @@ test('mock function test', () => {
 ```
 
 #### 3. `.mock.instances`
-Contain value of `this` of a mock constructor function on each of it's call.
+Contain the value of `this` of a mock constructor function on each of it's call.
 ```js
 test('mock function test', () => {
 	const mockFn = jest.fn(val => val);
@@ -573,7 +601,7 @@ pre-define returned values for a mock function on each called sequentially.
 })();
 ```
 
-### 3. # Mocking modules
+### 3. Mocking modules
 
 Assume that we have 3 files: `index.js`, `index.test.js`, `math.js`.
 
@@ -605,7 +633,7 @@ Now we want to test the functions inside `math.js` via their mock version when t
 
 #### 1. Mock a function with `jest.fn`
 
-This is the most basic way of mocking an existing function. Nonetheless, it can hardly be scalable.
+The most basic way of mocking an existing function.
 
 **index.test.js**
 ```js
@@ -653,7 +681,9 @@ test("calls math.subtract", () => {
 ```
 
 #### 3. Spy or mock a function with `jest.spyOn`
-Not so scalable. Nonetheless, we could always refer to both the original version as well as the mock version of a function
+
+This approach give us the ability to refer to the original version of a function after it's mocked.
+
 ```js
 import * as app from "./app";
 import * as math from "./math";
@@ -669,5 +699,39 @@ test("calls math.add", () => {
 });
 ```
 
+## 8. Some other Jest add-on could be useful
+### jest-diff
+A library helping us perform a deep compare between 2 values 
+```js
+import  diff  from  'jest-diff';
 
+it('hello', () => {
+	const  a  = { a: { b: { c:  5 } } };
+	const  b  = { a: { b: { c:  6 } } };
 
+	const  res  =  diff(a, b);
+	  
+	console.log(res);
+});
+
+/*
+	*** result:
+		 PASS  app/containers/App/tests/index.test.js
+		  ● Console
+
+		    console.log app/containers/App/tests/testChangeFile.test.js:19
+		      - Expected
+		      + Received
+		      
+		        Object {
+		          "a": Object {
+		            "b": Object {
+		      -       "c": 5,
+		      +       "c": 6,
+		            },
+		          },
+		        }
+*/
+```
+
+### Other ones can be found at [this](https://jestjs.io/docs/en/jest-platform).

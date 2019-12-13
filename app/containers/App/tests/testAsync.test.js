@@ -26,12 +26,11 @@
 // });
 // });
 
-
 // *** return a timer function
 test('the data callback returns should be "aaa"', () => {
-	const  callback = (data) => {
+  const callback = data => {
     expect(data).toBe('aaa');
-  }
+  };
 
-	setTimeout(callback, 2000);
+  setTimeout(callback, 2000);
 });
