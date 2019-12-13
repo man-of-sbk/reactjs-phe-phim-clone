@@ -29,24 +29,24 @@
   //     // *** expect the the first argument of the second call to be 1
   //     expect(mockFn.mock.calls[1][0]).toBe('hello');
   //   });
-  //   test('test .mock.instances', () => {
-  //     const mockFn = jest.fn(val => val);
-  //     new mockFn(1);
-  //     new mockFn('hello');
-  //     console.log(mockFn.mock.instances);
-  //   });
+  // test('test .mock.instances', () => {
+  //   const mockFn = jest.fn(function() {});
+  //   mockFn(1);
+  //   new mockFn('hello');
+  //   console.log(mockFn.mock.instances);
+  // });
 })();
 
 // *** .mock's methods
-(() => {
-  test('mock function test', () => {
-    const myMock = jest.fn();
+// (() => {
+//   test('mock function test', () => {
+//     const myMock = jest.fn();
 
-    myMock
-      .mockReturnValueOnce(10)
-      .mockReturnValueOnce('x')
-      .mockReturnValue(true);
+//     myMock
+//       .mockReturnValueOnce(10)
+//       .mockReturnValueOnce('x')
+//       .mockReturnValue(true);
 
-    console.log(myMock(), myMock(), myMock(), myMock());
-  });
-})();
+//     console.log(myMock(), myMock(), myMock(), myMock());
+//   });
+// })();

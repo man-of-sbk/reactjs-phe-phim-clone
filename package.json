@@ -14,6 +14,7 @@
   "license": "MIT",
   "scripts": {
     "testjest": "jest",
+    "testjestcov": "jest --coverage",
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
     "analyze": "node ./internals/scripts/analyze.js",
@@ -82,6 +83,9 @@
     "intl": "1.2.5",
     "invariant": "2.2.4",
     "ip": "1.1.5",
+    "jest-changed-files": "^24.9.0",
+    "jest-diff": "^24.9.0",
+    "jest-docblock": "^24.9.0",
     "lodash": "^4.17.11",
     "minimist": "1.2.0",
     "moment": "^2.24.0",
