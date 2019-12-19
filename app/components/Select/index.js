@@ -12,17 +12,15 @@ import Wrapper from './styledComponents/Wrapper';
 
 const { Option } = Wrapper;
 
-const Select = React.forwardRef(({ options, ...rest }, ref) => {
-  return (
-    <Wrapper {...rest} ref={ref}>
-      {options.map(option => (
-        <Option key={option.value} value={option.value}>
-          {option.content}
-        </Option>
-      ))}
-    </Wrapper>
-  );
-});
+const Select = React.forwardRef(({ options, ...rest }, ref) => (
+  <Wrapper {...rest} ref={ref}>
+    {options.map(option => (
+      <Option key={option.value} value={option.value}>
+        {option.content}
+      </Option>
+    ))}
+  </Wrapper>
+));
 
 Select.propTypes = {
   options: PropTypes.array,

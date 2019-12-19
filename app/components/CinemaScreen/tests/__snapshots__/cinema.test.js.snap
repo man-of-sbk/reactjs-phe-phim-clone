@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Cinema /> Component Should correct snapshot 1`] = `
+<div
+  class="Wrapper-l33txi-0 inoUTl"
+>
+  <div
+    class="screen"
+  />
+  <div
+    class="screen-brightness"
+  >
+    <div
+      class="outer-mask"
+    >
+      <div
+        class="inner-mask"
+      >
+        <div
+          class="screen-light"
+        />
+      </div>
+    </div>
+    <div
+      class="content"
+    >
+      Screen
+    </div>
+  </div>
+</div>
+`;

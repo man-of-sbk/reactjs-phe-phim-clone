@@ -16,7 +16,6 @@ import message from 'antd/lib/message';
 import CinemaScreen from 'components/CinemaScreen/index';
 import Header from './components/Header';
 
-import Seat from './components/Seat';
 import Wrapper from './styledComponents/Wrapper';
 
 import { singleSeat } from './utils/singleSeatHelpers';

@@ -5,7 +5,6 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
@@ -27,9 +26,7 @@ export function LoadingPage() {
   );
 }
 
-LoadingPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+LoadingPage.propTypes = {};
 
 function mapDispatchToProps(dispatch) {
   return {

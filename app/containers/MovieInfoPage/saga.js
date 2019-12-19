@@ -39,7 +39,6 @@ function* submitSeats({ payloads }) {
     yield put(actions.submitSeatsFailedAction());
   } else {
     yield put(actions.fetchSeatsSuccessAction(response.data.data));
-    console.log('after fetching seats success');
     yield put(actions.submitSeatsSuccessAction());
   }
 }

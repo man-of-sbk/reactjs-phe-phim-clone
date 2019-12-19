@@ -1,37 +1,37 @@
-/**
- *
- * Tests for CustomButton
- *
- * @see https://github.com/react-boilerplate/react-boilerplate/tree/master/docs/testing
- *
- */
-
 import React from 'react';
-import { render } from 'react-testing-library';
-// import 'jest-dom/extend-expect'; // add some helpful assertions
+import { render, fireEvent, cleanup } from '@testing-library/react';
 
-import CustomButton from '../index';
+import Button from '../index';
 
-describe('<CustomButton />', () => {
-  it('Expect to not log errors in console', () => {
-    const spy = jest.spyOn(global.console, 'error');
-    render(<CustomButton />);
-    expect(spy).not.toHaveBeenCalled();
+afterEach(() => cleanup());
+
+describe('<Button /> Component', () => {
+  test('Should correct snapshot', () => {
+    const { container } = render(<Button>text</Button>);
+    expect(container.firstChild).toMatchSnapshot();
   });
 
-  it('Expect to have additional unit tests specified', () => {
-    expect(true).toEqual(false);
+  test('Should contain text chilren', () => {
+    const { getByText } = render(<Button>button</Button>);
+    const button = getByText('button');
+    expect(button.textContent).toEqual('button');
   });
 
-  /**
-   * Unskip this test to use it
-   *
-   * @see {@link https://jestjs.io/docs/en/api#testskipname-fn}
-   */
-  it.skip('Should render and match the snapshot', () => {
-    const {
-      container: { firstChild },
-    } = render(<CustomButton />);
-    expect(firstChild).toMatchSnapshot();
+  test('Should correct text children when props children change', () => {
+    const { getByText, rerender } = render(<Button>before change</Button>);
+    getByText('before change');
+    rerender(<Button>after change</Button>);
+    getByText('after change');
+  });
+
+  test('Should test event click', () => {
+    const mockFun = jest.fn();
+    const { container, debug } = render(
+      <Button onClick={mockFun}>button</Button>,
+    );
+    debug();
+    fireEvent.click(container.firstChild);
+    expect(mockFun).toHaveBeenCalled();
+    expect(mockFun).toHaveBeenCalledTimes(1);
   });
 });

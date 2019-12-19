@@ -36,43 +36,41 @@ const movieInfoList = [
   },
 ];
 
-const MainMovieBanner = ({ movie, onOpenModal }) => {
-  return (
-    <Wrapper gutter={24} className="movie-info-container">
-      <div className="left-section">
-        <img
-          className="main-movie-poster"
-          src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-          alt="main-movie-poster"
-        />
+const MainMovieBanner = ({ movie, onOpenModal }) => (
+  <Wrapper gutter={24} className="movie-info-container">
+    <div className="left-section">
+      <img
+        className="main-movie-poster"
+        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        alt="main-movie-poster"
+      />
+    </div>
+    <div className="movie-info">
+      <div className="overview-section">
+        <div className="title-and-rating">
+          <h2>{movie.title}</h2>
+          <LazyPercentageCircle value={movie.vote_average * 10} />
+        </div>
+        <Button className="book-seat-btn" onClick={onOpenModal}>
+          Mua vé
+        </Button>
+        <i>Giật gân, Kinh dị</i>
+        <Divider />
+        <p>{movie.overview}</p>
       </div>
-      <div className="movie-info">
-        <div className="overview-section">
-          <div className="title-and-rating">
-            <h2>{movie.title}</h2>
-            <LazyPercentageCircle value={movie.vote_average * 10} />
+      <div className="user-info-list">
+        {movieInfoList.map((info, index) => (
+          <div className="info-block" key={index}>
+            <span className="info-title">{info.label}:</span>
+            <span className="info-content">
+              {info.content || movie[info.key]}
+            </span>
           </div>
-          <Button className="book-seat-btn" onClick={onOpenModal}>
-            Mua vé
-          </Button>
-          <i>Giật gân, Kinh dị</i>
-          <Divider />
-          <p>{movie.overview}</p>
-        </div>
-        <div className="user-info-list">
-          {movieInfoList.map((info, index) => (
-            <div className="info-block" key={index}>
-              <span className="info-title">{info.label}:</span>
-              <span className="info-content">
-                {info.content || movie[info.key]}
-              </span>
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
-    </Wrapper>
-  );
-};
+    </div>
+  </Wrapper>
+);
 
 MainMovieBanner.propTypes = {
   movie: PropTypes.object.isRequired,
