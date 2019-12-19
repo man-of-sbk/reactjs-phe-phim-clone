@@ -40,7 +40,6 @@ export function HomePage({ app }) {
 }
 
 HomePage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
   app: PropTypes.object.isRequired,
 };
 

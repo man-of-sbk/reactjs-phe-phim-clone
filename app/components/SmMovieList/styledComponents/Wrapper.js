@@ -1,6 +1,5 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
-import { secondary, primary } from 'cssVariable';
 
 import MovieListContainer from 'components/MovieListContainer/index';
 

@@ -19,7 +19,8 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import AuthPage from 'containers/AuthPage/Loadable';
 
-import MainNavbar from 'components/MainNavbar/index';
+// eslint-disable-next-line import/no-unresolved
+import MainNavbar from 'components/MainNavbar';
 import Footer from 'components/Footer/index';
 
 import GlobalStyle from 'global-styles';

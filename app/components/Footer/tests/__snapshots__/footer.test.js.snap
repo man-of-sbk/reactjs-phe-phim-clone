@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer/> Component Should correct snapshot 1`] = `
+<div
+  class="ant-row container Wrapper-dwom2b-0 bNAgYw"
+>
+  <div
+    class="ant-col ant-col-xs-24 ant-col-lg-12"
+  >
+    <h4>
+      Suncinema
+    </h4>
+    <div>
+      2018 Thử nghiệm cộng đồng , chờ giấy phép MXH của Bộ TT & TT
+    </div>
+  </div>
+  <div
+    class="ant-col ant-col-xs-24 ant-col-lg-12"
+  >
+    <h4>
+      Theo dõi chúng tôi
+    </h4>
+    <a
+      class="social-link"
+      href="/"
+    >
+      <img
+        alt="phe phim youtube"
+        src="https://phephim.vn/assets/images/youtube.png"
+      />
+    </a>
+    <a
+      class="social-link"
+      href="/"
+    >
+      <img
+        alt="phe phim facebook"
+        src="https://phephim.vn/assets/images/facebook.svg"
+      />
+    </a>
+    <a
+      class="social-link"
+      href="/"
+    >
+      <img
+        alt="phe phim instagram"
+        src="https://phephim.vn/assets/images/insta.svg"
+      />
+    </a>
+  </div>
+</div>
+`;

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Button /> Component Should correct snapshot 1`] = `
+<button
+  class="ant-btn Wrapper-sc-1xlqh7-0 eeqAZY ant-btn-background-ghost"
+  type="button"
+>
+  <span>
+    text
+  </span>
+</button>
+`;
+

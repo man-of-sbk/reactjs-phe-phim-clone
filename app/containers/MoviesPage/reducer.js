@@ -45,7 +45,6 @@ const moviesPageReducer = (state = initialState, action) =>
       case actionTypes.SEARCH_MOVIE_BY_NAME_SUCCESS_ACTION:
         const foundedMovies = [...action.payloads];
         // foundedMovies.length = 10;
-        console.log(foundedMovies);
         draft.movies = foundedMovies;
         draft.isFetchingMovies = false;
         break;
