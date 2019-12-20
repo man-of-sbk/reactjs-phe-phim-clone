@@ -6,7 +6,7 @@
  *
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 // import InfiniteScroll from 'react-infinite-scroller';
 import queryString from 'query-string';
@@ -89,13 +89,11 @@ export function MoviesPage({
             />
             <Row gutter={[24, 24]} className="movie-list-container row">
               {moviesPage.movies &&
-                moviesPage.movies.map((movie, index) => {
-                  return (
-                    <Col key={index} xs={12} sm={12} md={8} lg={6}>
-                      <MovieItem movie={movie} />
-                    </Col>
-                  );
-                })}
+                moviesPage.movies.map((movie, index) => (
+                  <Col key={index} xs={12} sm={12} md={8} lg={6}>
+                    <MovieItem movie={movie} />
+                  </Col>
+                ))}
             </Row>
             {moviesPage.totalPage && (
               <Pagination
