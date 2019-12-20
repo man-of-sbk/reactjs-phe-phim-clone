@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import styled from 'styled-components';
 
-import { secondary, darkGrey3 } from 'cssVariable';
+import { darkGrey3 } from 'cssVariable';
 
 const Wrapper = styled.div`
   .screen {

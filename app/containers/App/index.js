@@ -19,7 +19,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import AuthPage from 'containers/AuthPage/Loadable';
 
-import MainNavbar from 'components/MainNavbar/index';
+import MainNavbar from 'components/MainNavBar/index';
 import Footer from 'components/Footer/index';
 
 import GlobalStyle from 'global-styles';

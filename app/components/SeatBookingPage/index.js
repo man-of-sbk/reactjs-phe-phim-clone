@@ -16,7 +16,6 @@ import message from 'antd/lib/message';
 import CinemaScreen from 'components/CinemaScreen/index';
 import Header from './components/Header';
 
-import Seat from './components/Seat';
 import Wrapper from './styledComponents/Wrapper';
 
 import { singleSeat } from './utils/singleSeatHelpers';
@@ -115,7 +114,7 @@ function SeatBookingPage({
                     onClick={
                       seat === null
                         ? () => handleOnClick(seatIndex, seatRowIndex)
-                        : () => {}
+                        : () => null
                     }
                   >
                     <span>{`${seatRowIndex + 1}${seatIndex + 1}`}</span>

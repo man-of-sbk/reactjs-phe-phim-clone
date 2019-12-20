@@ -7,7 +7,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import Tooltip from 'antd/lib/tooltip';
 
 import SmMovieItem from 'components/SmMovieItem/index';
 
